@@ -9,8 +9,6 @@
 /*   Updated: 2024/08/29 13:17:50 by vshpilev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-
 #ifndef PUSH_SWAP_H
 # define PUSH_SWAP_H
 
@@ -19,17 +17,27 @@
 # include <stdbool.h>
 # include <unistd.h>
 
-typedef struct s_stack_node
+typedef struct s_stack
 {
-	int					value;
-	int					current_position;
-	int					final_index;
-	int					push_price;
-	bool				above_median;
-	bool				cheapest;
-	struct s_stack_node	*target_node;
-	struct s_stack_node	*next;
-	struct s_stack_node	*prev;
-}				t_stack_node;
+	int					n;
+	int					index;
+	struct s_stack		*next;
+	struct s_stack		*target;
+	int					cost;
+}	t_stack;
+
+void			sa(t_stack **a);
+void			sb(t_stack **b);
+void			ss(t_stack **a, t_stack **b);
+void			pa(t_stack **a, t_stack **b);
+void			pb(t_stack **a, t_stack **b);
+void			ra(t_stack **a);
+void			rb(t_stack **b);
+void			rr(t_stack **a, t_stack **b);
+void			rr_and_refresh(t_stack **a, t_stack **b, t_stack *cheapest);
+void			rra(t_stack **a);
+void			rrb(t_stack **b);
+void			rrr(t_stack **a, t_stack **b);
+void			rrr_and_refresh(t_stack **a, t_stack **b, t_stack *cheapest);
 
 #endif

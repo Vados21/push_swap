@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   operations_push.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: vshpilev <vshpilev@student.hive.fi>        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/09/13 12:40:48 by vshpilev          #+#    #+#             */
+/*   Updated: 2024/09/13 12:40:51 by vshpilev         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 #include "push_swap.h"
 
 static void push(t_stack **src, t_stack **dst)
@@ -23,11 +34,11 @@ static void push(t_stack **src, t_stack **dst)
 void pa(t_stack **a, t_stack **b)
 {
 	push(b, a);
-	write(1, pa\n,3);
+	write(1, &"pa\n",3);
 }
 
 void pb(t_stack **a, t_stack **b)
 {
     push(a, b);
-    ft_printf("pb\n");
+    write(1, &"pb\n",3);
 }
