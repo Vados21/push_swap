@@ -43,10 +43,15 @@ void radix_sort(t_push_swap *stacks)
 {
     int max_bits = find_max_bits(stacks->a);
     int size = stacks->a->size;
+    int i = 0;  // Для внешнего цикла
 
-    for (int i = 0; i < max_bits; i++)
+    // Внешний цикл по битам
+    while (i < max_bits)
     {
-        for (int j = 0; j < size; j++)
+        int j = 0;  // Для внутреннего цикла
+
+        // Внутренний цикл для прохода по элементам стека
+        while (j < size)
         {
             int num = stacks->a->top->data;
 
@@ -54,15 +59,21 @@ void radix_sort(t_push_swap *stacks)
                 ra(stacks);
             else
                 pb(stacks->a, stacks->b);
+
+            j++;  // Увеличиваем счетчик
         }
 
+        // Возвращаем все элементы из стека b в стек a
         while (stacks->b->size > 0)
             pa(stacks->a, stacks->b);
 
-        // Проверяем, отсортирован ли стек после каждой итерации
+        // Проверяем, отсортирован ли стек
         if (is_sorted(stacks->a))
-            break;  // Выходим из цикла, если стек отсортирован
+            break;  // Прерываем цикл, если стек отсортирован
+
+        i++;  // Увеличиваем счетчик для внешнего цикла
     }
 }
+
 
 
