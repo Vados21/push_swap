@@ -1,18 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   errors_func.c                                      :+:      :+:    :+:   */
+/*   ft_toupper.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vshpilev <vshpilev@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/13 12:57:55 by vshpilev          #+#    #+#             */
-/*   Updated: 2024/09/13 12:57:58 by vshpilev         ###   ########.fr       */
+/*   Created: 2024/04/18 13:20:36 by vshpilev          #+#    #+#             */
+/*   Updated: 2024/04/25 12:57:55 by vshpilev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "push_swap.h"
 
-void	error(void)
+int	ft_toupper(int c)
 {
-	write(2, "Error\n", 6);
-	exit(1);
+	if (!(c >= 97 && c <= 122))
+	{
+		return (c);
+	}
+	else
+	{
+		return (c - 32);
+	}
 }

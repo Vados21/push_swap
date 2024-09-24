@@ -10,36 +10,34 @@
 /*                                                                            */
 /* ************************************************************************** */
 #include "push_swap.h"
-static void swap(t_stack **stack)
-{
-    int buf_n;
-    int buf_index;
 
-    if (!*stack || !(*stack)->next)
-        return;
-    buf_n = (*stack)->n;
-    buf_index = (*stack)->index;
-    (*stack)->n = ((*stack)->next)->n;
-    (*stack)->index = ((*stack)->next)->index;
-    ((*stack)->next)->n = buf_n;
-    ((*stack)->next)->index = buf_index;
+void	swap(t_stack *stack)
+{
+	if (stack->size < 2)
+		return ;
+	t_node *first = stack->top;
+	t_node *second = stack->top->next;
+
+	first->next = second->next;
+	second->next = first;
+	stack->top = second;
 }
 
-void sa(t_stack **a)
+void	sa(t_push_swap *stacks)
 {
-    swap(a);
-    ft_printf("sa\n");
+	swap(stacks->a);
+	write(1, "sa\n", 3);
 }
 
-void sb(t_stack **b)
+void	sb(t_push_swap *stacks)
 {
-    swap(b);
-    ft_printf("sb\n");
+	swap(stacks->b);
+	write(1, "sb\n", 3);
 }
 
-void ss(t_stack **a, t_stack **b)
+void	ss(t_push_swap *stacks)
 {
-    swap(a);
-    swap(b);
-    ft_printf("ss\n");
+	swap(stacks->a);
+	swap(stacks->b);
+	write(1, "ss\n", 3);
 }

@@ -1,18 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   errors_func.c                                      :+:      :+:    :+:   */
+/*   ft_lstadd_back.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vshpilev <vshpilev@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/13 12:57:55 by vshpilev          #+#    #+#             */
-/*   Updated: 2024/09/13 12:57:58 by vshpilev         ###   ########.fr       */
+/*   Created: 2024/09/16 11:35:32 by vshpilev          #+#    #+#             */
+/*   Updated: 2024/09/16 11:35:35 by vshpilev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "push_swap.h"
+#include "libft.h"
 
-void	error(void)
+void	ft_add_back(t_list **alst, t_list *new)
 {
-	write(2, "Error\n", 6);
-	exit(1);
+	t_list	*tmp;
+
+	if (alst)
+	{
+		if (*alst == NULL)
+			*alst = new;
+		else
+		{
+			tmp = ft_lstlast(*(alst));
+			tmp->next = new;
+		}
+	}
 }
+

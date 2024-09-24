@@ -11,51 +11,44 @@
 /* ************************************************************************** */
 #include "push_swap.h"
 
-static void rev_rotate(t_stack **stack)
+void reverse_rotate(t_stack *stack)
 {
-    t_stack *last;
-    t_stack *cur_list;
-
-    if (!*stack || !(*stack)->next)
+    if (!stack || stack->size < 2)
         return;
-    last = last_elem(*stack);
-    cur_list = *stack;
-    while (cur_list != NULL)
+
+    t_node *last = stack->top;
+    t_node *second_last = NULL;
+
+    // Ищем последний и предпоследний элементы
+    while (last->next)
     {
-        if (cur_list->next->next == NULL)
-        {
-            cur_list->next = NULL;
-            break;
-        }
-        cur_list = cur_list->next;
+        second_last = last;
+        last = last->next;
     }
-    last->next = *stack;
-    *stack = last;
+
+    // Перемещаем последний элемент наверх стека
+    if (second_last)
+        second_last->next = NULL;
+    
+    last->next = stack->top;
+    stack->top = last;
 }
 
-void rra(t_stack **a)
+void	rra(t_push_swap *stacks)
 {
-    rev_rotate(a);
-    ft_printf("rra\n");
+	reverse_rotate(stacks->a);
+	write(1, "rra\n", 4);
 }
 
-void rrb(t_stack **b)
+void	rrb(t_push_swap *stacks)
 {
-    rev_rotate(b);
-    ft_printf("rrb\n");
+	reverse_rotate(stacks->b);
+	write(1, "rrb\n", 4);
 }
 
-void rrr(t_stack **a, t_stack **b)
+void	rrr(t_push_swap *stacks)
 {
-    rev_rotate(a);
-    rev_rotate(b);
-    ft_printf("rrr\n");
-}
-
-void rrr_and_refresh(t_stack **a, t_stack **b, t_stack *cheapest)
-{
-    while (*a != cheapest && *b != cheapest->target)
-        rrr(a, b);
-    put_index(*a);
-    put_index(*b);
+	reverse_rotate(stacks->a);
+	reverse_rotate(stacks->b);
+	write(1, "rrr\n", 4);
 }

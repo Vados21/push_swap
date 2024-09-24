@@ -1,18 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   errors_func.c                                      :+:      :+:    :+:   */
+/*   ft_lstsize.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vshpilev <vshpilev@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/13 12:57:55 by vshpilev          #+#    #+#             */
-/*   Updated: 2024/09/13 12:57:58 by vshpilev         ###   ########.fr       */
+/*   Created: 2024/09/16 11:32:51 by vshpilev          #+#    #+#             */
+/*   Updated: 2024/09/16 11:32:56 by vshpilev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "push_swap.h"
+#include "libft.h"
 
-void	error(void)
+int	ft_lstsize(t_list *lst)
 {
-	write(2, "Error\n", 6);
-	exit(1);
+	int	i;
+
+	i = 0;
+	while (lst)
+	{
+		lst = lst->next;
+		i++;
+	}
+	return (i);
 }
+

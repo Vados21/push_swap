@@ -1,18 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   errors_func.c                                      :+:      :+:    :+:   */
+/*   ft_striteri.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vshpilev <vshpilev@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/13 12:57:55 by vshpilev          #+#    #+#             */
-/*   Updated: 2024/09/13 12:57:58 by vshpilev         ###   ########.fr       */
+/*   Created: 2024/05/10 14:56:29 by vshpilev          #+#    #+#             */
+/*   Updated: 2024/05/10 14:56:31 by vshpilev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "push_swap.h"
 
-void	error(void)
+void	ft_striteri(char *s, void (*f)(unsigned int, char *))
 {
-	write(2, "Error\n", 6);
-	exit(1);
+	unsigned int	i;
+
+	if (!s || !f)
+		return ;
+	i = -1;
+	while (s[++i])
+		f(i, &s[i]);
 }

@@ -9,122 +9,98 @@
 /*   Updated: 2024/09/13 12:41:51 by vshpilev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+#include "push_swap.h"
 
-// аругументы могут быть цифрами или строкой с цифрами. Сплит нужен чтобы разбить строку на цифры
+#include <stdlib.h>
 
-#include <stdio.h>
-#include <stdbool.h>
-
-static int    count_words(char *str, char separator)
+void	*ft_free(char **res, size_t pos)
 {
-    int        count;
-    bool    inside_word;
-
-    count = 0;
-    while (*str)
-    {
-        inside_word = false;
-        while (*str == separator && *str)
-            ++str;
-        while (*str != separator && *str)
-        {
-            if (!inside_word)
-            {
-                ++count;
-                inside_word = true;
-            }
-            ++str;
-        }
-    }
-    return (count);
+	while (pos != 0)
+	{
+		free(res[pos]);
+		pos--;
+	}
+	free(res[pos]);
+	free(res);
+	return (NULL);
 }
 
-/*
- * I exploit static variables
- * which are basically 
- * "Global private variables"
- * i can access it only via the get_next_word function
-*/
-static char    *get_next_word(char *str, char separator)
+void	ft_word(char const *str, size_t *first, size_t *last, char c)
 {
-    static int    cursor = 0;
-    char        *next_str;
-    int            len;
-    int            i;
-
-    len = 0;
-    i = 0;
-    while (str[cursor] == separator)
-        ++cursor;
-    while ((str[cursor + len] != separator) && str[cursor + len])
-        ++len;
-    next_str = malloc((size_t)len * sizeof(char) + 1);
-    if (NULL == next_str)
-        return (NULL);
-    while ((str[cursor] != separator) && str[cursor])
-        next_str[i++] = str[cursor++];
-    next_str[i] = '\0';
-    return (next_str);
+	*first = *last;
+	while (str[*first] == c)
+		*first = *first + 1;
+	*last = *first;
+	while (str[*last] != c && str[*last] != '\0')
+		*last = *last + 1;
 }
 
-/*
- * I recreate an argv in the HEAP
- *
- * +2 because i want to allocate space
- * for the "\0" Placeholder and the final NULL
- *
- * vector_strings-->[p0]-> "\0" Placeholder to mimic argv
- *                  |->[p1]->"Hello"
- *                  |->[p2]->"how"
- *                  |->[p3]->"Are"
- *                  |->[..]->"..""
- *                  |->[NULL]
-*/
-char    **ft_split(char *str, char separator)
+size_t	ft_count(char const *str, char c)
 {
-    int        words_number;
-    char    **vector_strings;
-    int        i;
+	size_t	count;
+	size_t	first;
+	size_t	last;
 
-    i = 0;
-    words_number = count_words(str, separator);
-    if (!words_number)
-        exit(1);
-    vector_strings = malloc(sizeof(char *) * (size_t)(words_number + 2));
-    if (NULL == vector_strings)
-        return (NULL);
-    while (words_number-- >= 0)
-    {
-        if (0 == i)
-        {
-            vector_strings[i] = malloc(sizeof(char));
-            if (NULL == vector_strings[i])
-                return (NULL);
-            vector_strings[i++][0] = '\0';
-            continue ;
-        }
-        vector_strings[i++] = get_next_word(str, separator);
-    }
-    vector_strings[i] = NULL;
-    return (vector_strings);
+	count = 0;
+	first = 0;
+	last = 0;
+	while (str[last] != '\0')
+	{
+		ft_word(str, &first, &last, c);
+		if (last == first)
+			break ;
+		else
+			count++;
+	}
+	return (count);
 }
 
-int main(int argc, char **argv)
+char	*ft_fill(char const *str, size_t first, size_t last)
 {
-  int i = 0;
-  argv = ft_split("Hello world", 32);
-  while (argv[i])
-  {
-    printf("pointer %p , %s$\n", argv[i], argv[i]);
-    i++;
-    fflush(stdout);
-  }
-  i = 0;
-  while (argv[i])
-  {
-    printf("Pointer being freed %p\n\n", argv[i]);
-    fflush(stdout);
-    free(argv[i++]);
-  }
-  free(argv);
+	char	*word;
+	size_t	pos;
+
+	pos = 0;
+	word = malloc(sizeof(char) * (last - first + 1));  // +1 для нулевого символа
+	if (!word)
+		return (NULL);
+	while (first < last)
+	{
+		word[pos++] = str[first++];
+	}
+	word[pos] = '\0';  // Добавляем завершающий нулевой символ
+	return (word);
 }
+
+char	**ft_split(char const *str, char c)
+{
+	char	**res;
+	size_t	first;
+	size_t	last;
+	size_t	pos;
+	size_t	word_count;
+
+	if (!str)
+		return (NULL);
+
+	word_count = ft_count(str, c);  // Вызываем ft_count один раз
+	res = malloc(sizeof(char *) * (word_count + 1));  // +1 для NULL в конце
+	if (!res)
+		return (NULL);
+	last = 0;
+	first = 0;
+	pos = 0;
+	while (pos < word_count)
+	{
+		ft_word(str, &first, &last, c);
+		if (last == first)
+			break ;
+		res[pos] = ft_fill(str, first, last);
+		if (!res[pos])
+			return (ft_free(res, pos));  // Освобождаем память в случае ошибки
+		pos++;
+	}
+	res[pos] = NULL;  // Завершаем массив указателем NULL
+	return (res);
+}
+

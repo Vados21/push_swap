@@ -1,18 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   errors_func.c                                      :+:      :+:    :+:   */
+/*   ft_lstclear.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vshpilev <vshpilev@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/13 12:57:55 by vshpilev          #+#    #+#             */
-/*   Updated: 2024/09/13 12:57:58 by vshpilev         ###   ########.fr       */
+/*   Created: 2024/09/16 11:38:14 by vshpilev          #+#    #+#             */
+/*   Updated: 2024/09/16 11:38:16 by vshpilev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "push_swap.h"
+#include "libft.h"
 
-void	error(void)
+void	ft_lstclear(t_list **lst, void (*del)(void*))
 {
-	write(2, "Error\n", 6);
-	exit(1);
+	t_list	*next;
+
+	next = *lst;
+	while (next)
+	{
+		next = next->next;
+		ft_lstdelone(*lst, del);
+		*lst = next;
+	}
+	lst = NULL;
 }

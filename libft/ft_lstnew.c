@@ -1,18 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   errors_func.c                                      :+:      :+:    :+:   */
+/*   ft_lstnew.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vshpilev <vshpilev@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/13 12:57:55 by vshpilev          #+#    #+#             */
-/*   Updated: 2024/09/13 12:57:58 by vshpilev         ###   ########.fr       */
+/*   Created: 2024/05/13 13:46:53 by vshpilev          #+#    #+#             */
+/*   Updated: 2024/09/16 11:31:37 by vshpilev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "push_swap.h"
+#include "libft.h"
 
-void	error(void)
+t_list
+	*ft_lstnew(void *content)
 {
-	write(2, "Error\n", 6);
-	exit(1);
+	t_list	*my_list;
+
+	my_list = (t_list *)malloc(sizeof(*my_list));
+	if (!my_list)
+		return (NULL);
+	my_list->content = content;
+	my_list->next = NULL;
+	return (my_list);
 }

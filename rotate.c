@@ -11,43 +11,52 @@
 /* ************************************************************************** */
 #include "push_swap.h"
 
-static void rotate(t_stack **stack)
+void	rotate(t_stack *stack)
 {
-    t_stack *first;
-    t_stack *last;
+	if (stack->size < 2)
+		return ;
 
-    if (!*stack || !(*stack)->next)
-        return;
-    first = *stack;
-    last = last_elem(*stack);
-    *stack = first->next;
-    last->next = first;
-    first->next = NULL;
+	t_node *first = stack->top;
+	t_node *last = stack->top;
+
+	while (last->next != NULL)
+		last = last->next;
+
+	stack->top = first->next;
+	first->next = NULL;
+	last->next = first;
 }
 
-void ra(t_stack **a)
+void print_stack(t_stack *stack, char *stack_name)
 {
-    rotate(a);
-    ft_printf("ra\n");
+    t_node *current = stack->top;
+    printf("Stack %s: ", stack_name);
+    while (current)
+    {
+        printf("%d ", current->data);
+        current = current->next;
+    }
+    printf("\n");
 }
 
-void rb(t_stack **b)
+void ra(t_push_swap *stacks)
 {
-    rotate(b);
-    ft_printf("rb\n");
+    write(1, "Before ra\n", 10);  // Отладочный вывод
+    rotate(stacks->a);
+    write(1, "ra\n", 3);
+    print_stack(stacks->a, "a");  // Отладочный вывод состояния стека a
+	print_stack(stacks->b, "b");
 }
 
-void rr(t_stack **a, t_stack **b)
+void	rb(t_push_swap *stacks)
 {
-    rotate(a);
-    rotate(b);
-    ft_printf("rr\n");
+	rotate(stacks->b);
+	write(1, "rb\n", 3);
 }
 
-void rr_and_refresh(t_stack **a, t_stack **b, t_stack *cheapest)
+void	rr(t_push_swap *stacks)
 {
-    while (*a != cheapest && *b != cheapest->target)
-        rr(a, b);
-    put_index(*a);
-    put_index(*b);
+	rotate(stacks->a);
+	rotate(stacks->b);
+	write(1, "rr\n", 3);
 }

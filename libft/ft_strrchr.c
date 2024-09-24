@@ -1,18 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   errors_func.c                                      :+:      :+:    :+:   */
+/*   ft_strrchr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vshpilev <vshpilev@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/13 12:57:55 by vshpilev          #+#    #+#             */
-/*   Updated: 2024/09/13 12:57:58 by vshpilev         ###   ########.fr       */
+/*   Created: 2024/04/29 13:48:36 by vshpilev          #+#    #+#             */
+/*   Updated: 2024/04/29 13:48:39 by vshpilev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "push_swap.h"
+#include "libft.h"
 
-void	error(void)
+char	*ft_strrchr(const char *s, int c)
 {
-	write(2, "Error\n", 6);
-	exit(1);
+	char	*str_end;
+
+	str_end = (char *)s + ft_strlen(s);
+	while (str_end > s && *str_end != (char)c)
+		str_end--;
+	if (*str_end == (char)c)
+		return (str_end);
+	return (NULL);
 }

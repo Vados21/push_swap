@@ -9,7 +9,7 @@
 /*   Updated: 2024/05/08 13:45:15 by vshpilev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include <string.h>
+#include "libft.h"
 
 static void	*ft_free(char **res, size_t pos)
 {

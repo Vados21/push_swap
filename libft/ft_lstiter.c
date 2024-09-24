@@ -1,18 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   errors_func.c                                      :+:      :+:    :+:   */
+/*   ft_lstiter.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vshpilev <vshpilev@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/13 12:57:55 by vshpilev          #+#    #+#             */
-/*   Updated: 2024/09/13 12:57:58 by vshpilev         ###   ########.fr       */
+/*   Created: 2024/09/16 11:39:13 by vshpilev          #+#    #+#             */
+/*   Updated: 2024/09/16 11:39:16 by vshpilev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "push_swap.h"
+#include "libft.h"
 
-void	error(void)
+void	ft_lstiter(t_list *lst, void (*f)(void *))
 {
-	write(2, "Error\n", 6);
-	exit(1);
+	t_list	*next;
+
+	if (lst != NULL)
+	{
+		next = lst;
+		while (1)
+		{
+			(*f)(next->content);
+			next = next->next;
+			if (next == NULL)
+				return ;
+		}
+	}
 }
