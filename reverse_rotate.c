@@ -11,27 +11,24 @@
 /* ************************************************************************** */
 #include "push_swap.h"
 
-void reverse_rotate(t_stack *stack)
+void	reverse_rotate(t_stack *stack)
 {
-    if (!stack || stack->size < 2)
-        return;
+	t_node	*last;
+	t_node	*second_last;
 
-    t_node *last = stack->top;
-    t_node *second_last = NULL;
-
-    // Ищем последний и предпоследний элементы
-    while (last->next)
-    {
-        second_last = last;
-        last = last->next;
-    }
-
-    // Перемещаем последний элемент наверх стека
-    if (second_last)
-        second_last->next = NULL;
-    
-    last->next = stack->top;
-    stack->top = last;
+	if (!stack || stack->size < 2)
+		return ;
+	last = stack->top;
+	second_last = NULL;
+	while (last->next)
+	{
+		second_last = last;
+		last = last->next;
+	}
+	if (second_last)
+		second_last->next = NULL;
+	last->next = stack->top;
+	stack->top = last;
 }
 
 void	rra(t_push_swap *stacks)

@@ -47,17 +47,17 @@ all: $(NAME)
 
 # Создание исполняемого файла
 $(NAME): $(OBJS)
-	$(MAKE) -C libft  # Собираем libft, если нужно
+	$(MAKE) -C libft
 	$(CC) $(CFLAGS) $(OBJS) $(LIBFT) -o $(NAME)
 
 # Удаление объектных файлов
 clean:
-	$(MAKE) -C libft clean  # Чистим libft
+	$(MAKE) -C libft clean
 	rm -f $(OBJS)
 
 # Удаление объектных файлов и исполняемого файла
 fclean: clean
-	$(MAKE) -C libft fclean  # Полная чистка libft
+	$(MAKE) -C libft fclean
 	rm -f $(NAME)
 
 # Пересборка

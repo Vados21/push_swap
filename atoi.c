@@ -9,42 +9,37 @@
 /*   Updated: 2024/09/24 13:23:03 by vshpilev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-
 #include "push_swap.h"
+
+static char	is_whitespace(char c)
+{
+	return (c == ' ' || c == '\t' || c == '\r' || c == '\n' || c == '\v'
+		|| c == '\f');
+}
 
 int	ft_atoi_ver_2(const char *str)
 {
-	int				mod;
-	long long int	i;
+	char		sign;
+	long long	res;
+	long long	res_prev;
 
-	i = 0;
-	mod = 1;
-	while (*str == ' ' || *str == '\t' || *str == '\n' || *str == '\f'
-		|| *str == '\v' || *str == '\r')
+	sign = 1;
+	res = 0;
+	while (is_whitespace(*str))
 		str++;
 	if (*str == '-' || *str == '+')
+		if (*(str++) == '-')
+			sign = -1;
+	while (*str >= '0' && *str <= '9')
 	{
-		if (*str == '-')
-			mod = -1;
-		str++;
-	}
-	if (*str == '\0')  // Проверка на пустую строку после знака
-		error();
-
-	while (*str)
-	{
-		if (!ft_isdigit(*str))
-			error();
-		if (i > 2147483647 / 10 || (i == 2147483647 / 10 && (*str - '0') > 7))
+		res_prev = res;
+		res = res * 10 + (*(str++) - '0');
+		if ((res_prev ^ res) < 0)
 		{
-			if (mod == 1)
-				error();  // Переполнение положительного числа
-			else if (mod == -1 && i > 2147483648 / 10)
-				error();  // Переполнение отрицательного числа
+			if (sign > 0)
+				return (-1);
+			return (0);
 		}
-		i = i * 10 + (*str - '0');
-		str++;
 	}
-	return (mod * i);
+	return ((int)res * sign);
 }

@@ -11,6 +11,8 @@
 /* ************************************************************************** */
 #include "push_swap.h"
 
+#include "push_swap.h"
+
 void validate_input(int argc, char **argv)
 {
     int i;
@@ -74,3 +76,4 @@ t_stack *parse_input(int argc, char **argv)
 
     return stack;
 }
+

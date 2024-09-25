@@ -16,3 +16,18 @@ void	error(void)
 	write(2, "Error\n", 6);
 	exit(1);
 }
+
+void	free_stack(t_stack *stack)
+{
+	t_node	*current;
+	t_node	*next;
+
+	current = stack->top;
+	while (current != NULL)
+	{
+		next = current->next;
+		free(current);
+		current = next;
+	}
+	free(stack);
+}

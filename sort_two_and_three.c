@@ -43,13 +43,16 @@ void	three_nice(t_push_swap *stacks, int first, int second, int third)
 void	sort_three(t_push_swap *stacks)
 {
 	three_nice(stacks,
-		stacks->a->top->data,                     // Получаем первый элемент (верхний элемент стека)
-		stacks->a->top->next->data,               // Получаем второй элемент
-		stacks->a->top->next->next->data);        // Получаем третий элемент
+		stacks->a->top->data,
+		stacks->a->top->next->data,
+		stacks->a->top->next->next->data);
 }
 
 void	sort_two(t_push_swap *stacks)
 {
-	if (stacks->a->top->data > stacks->a->top->next->data)  // Проверяем два элемента в стеке
-		sa(stacks);  // Если верхний элемент больше второго, меняем их местами
+	if (stacks->a->top->data > stacks->a->top->next->data)
+	{
+		sa(stacks);
+	}
 }
+

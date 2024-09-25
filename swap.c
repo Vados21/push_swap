@@ -13,11 +13,13 @@
 
 void	swap(t_stack *stack)
 {
+	t_node	*first;
+	t_node	*second;
+
 	if (stack->size < 2)
 		return ;
-	t_node *first = stack->top;
-	t_node *second = stack->top->next;
-
+	first = stack->top;
+	second = stack->top->next;
 	first->next = second->next;
 	second->next = first;
 	stack->top = second;

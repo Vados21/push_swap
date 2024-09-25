@@ -17,6 +17,8 @@
 # include <limits.h>
 # include <stdbool.h>
 # include <unistd.h>
+# include <stdio.h>
+# include <string.h>
 
 // Определение узла стека
 typedef struct s_node
@@ -37,6 +39,7 @@ typedef struct s_push_swap
 {
 	t_stack	*a;
 	t_stack	*b;
+    int operation_count;
 }				t_push_swap;
 
 // Операции со стеками
@@ -81,5 +84,8 @@ void	swap(t_stack *stack);
 t_stack	*parse_input(int argc, char **argv);
 int is_sorted(t_stack *stack);
 void print_stack(t_stack *stack, char *stack_name);
+void free_stack(t_stack *stack);
+void push_to_stack(t_stack *stack, int num);
+int find_max_index(t_stack *stack);
 
 #endif

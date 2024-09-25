@@ -11,70 +11,81 @@
 /* ************************************************************************** */
 #include "push_swap.h"
 
-
-//RADIX SORT
-
-#include <stdlib.h>
-#include <stdio.h>
-int is_sorted(t_stack *stack)
+int	is_sorted(t_stack *stack)
 {
-    t_node *current = stack->top;
+	t_node	*current;
 
-    while (current && current->next)
-    {
-        if (current->data > current->next->data)
-            return 0;  // Не отсортировано
-        current = current->next;
-    }
-    return 1;  // Отсортировано
+	current = stack->top;
+	while (current && current->next)
+	{
+		if (current->data > current->next->data)
+			return (0);
+		current = current->next;
+	}
+	return (1);
 }
 
+void	validate_input(int argc, char **argv);
+t_stack	*parse_input(int argc, char **argv);
 
-// Прототипы вспомогательных функций
-void    validate_input(int argc, char **argv);
-t_stack *parse_input(int argc, char **argv);
-
-int main(int argc, char **argv)
+void	free_split(char **split)
 {
-    t_push_swap stacks;
+	int	i;
 
-    // Проверка валидности входных данных
-    if (argc < 2)
-    {
-        fprintf(stderr, "Error\n");
-        return (1);
-    }
-    validate_input(argc, argv);
+	i = 0;
+	while (split[i])
+		free(split[i++]);
+	free(split);
+}
 
-    // Разбираем данные и создаем стек a
-    stacks.a = parse_input(argc, argv);
-    stacks.b = malloc(sizeof(t_stack));
-    stacks.b->top = NULL;
-    stacks.b->size = 0;
+int	handle_args(int argc, char **argv, t_push_swap *stacks)
+{
+	char	**numbers;
 
-        // Проверяем, отсортирован ли стек перед началом сортировки
-    if (is_sorted(stacks.a))
-    {
-        free(stacks.a);
-        free(stacks.b);
-        return (0);  // Если стек отсортирован, программа завершает работу
-    }
+	if (argc == 2)
+	{
+		numbers = ft_split(argv[1], ' ');
+		if (!numbers || !numbers[0])
+			return (0);
+		validate_input(argc, numbers);
+		stacks->a = parse_input(argc, numbers);
+		free_split(numbers);
+	}
+	else
+	{
+		validate_input(argc, argv);
+		stacks->a = parse_input(argc - 1, argv + 1);
+	}
+	return (1);
+}
 
-    // В зависимости от количества элементов выбираем метод сортировки
-    if (stacks.a->size == 2)
-        sort_two(&stacks);
-    else if (stacks.a->size == 3)
-        sort_three(&stacks);
-    else if (stacks.a->size == 4)
-        sort_four(&stacks);
-    else if (stacks.a->size == 5)
-        sort_five(&stacks);
-    else
-        radix_sort(&stacks);  // Radix сортировка для большого количества элементов
+void	choose_sort(t_push_swap *stacks)
+{
+	if (stacks->a->size == 2)
+		sort_two(stacks);
+	else if (stacks->a->size == 3)
+		sort_three(stacks);
+	else if (stacks->a->size == 4)
+		sort_four(stacks);
+	else if (stacks->a->size == 5)
+		sort_five(stacks);
+	else
+		radix_sort(stacks);
+}
 
-    // Очистка памяти
-    free(stacks.a);
-    free(stacks.b);
+int	main(int argc, char **argv)
+{
+	t_push_swap	stacks;
 
-    return (0);
+	if (argc < 2 || !handle_args(argc, argv, &stacks))
+		return (printf("Error\n"), 1);
+	stacks.b = malloc(sizeof(t_stack));
+	stacks.b->top = NULL;
+	stacks.b->size = 0;
+	if (is_sorted(stacks.a))
+		return (free_stack(stacks.a), free_stack(stacks.b), 0);
+	choose_sort(&stacks);
+	free_stack(stacks.a);
+	free_stack(stacks.b);
+	return (0);
 }

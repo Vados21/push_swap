@@ -11,96 +11,75 @@
 /* ************************************************************************** */
 #include "push_swap.h"
 
-#include <stdlib.h>
-
-void	*ft_free(char **res, size_t pos)
+static int	count_words(char const *s, char c)
 {
-	while (pos != 0)
+	int	res;
+	int	i;
+
+	i = 0;
+	res = 0;
+	while (s[i])
 	{
-		free(res[pos]);
-		pos--;
+		while (s[i] && s[i] == c)
+			i++;
+		if (s[i])
+			res++;
+		while (s[i] && s[i] != c)
+			i++;
 	}
-	free(res[pos]);
+	return (res);
+}
+
+static int	get_word_len(const char *s, char c)
+{
+	int	res;
+
+	res = 0;
+	while (s[res] && s[res] != c)
+		res++;
+	return (res);
+}
+
+static void	*handle_malloc_fail(char **res, int i)
+{
+	while (--i >= 0)
+		free(res[i]);
 	free(res);
 	return (NULL);
 }
 
-void	ft_word(char const *str, size_t *first, size_t *last, char c)
+static void	copy_word(char **res, const char *str, int i, int word_len)
 {
-	*first = *last;
-	while (str[*first] == c)
-		*first = *first + 1;
-	*last = *first;
-	while (str[*last] != c && str[*last] != '\0')
-		*last = *last + 1;
+	res[i][word_len] = '\0';
+	while (--word_len >= 0)
+		res[i][word_len] = str[word_len];
 }
 
-size_t	ft_count(char const *str, char c)
-{
-	size_t	count;
-	size_t	first;
-	size_t	last;
-
-	count = 0;
-	first = 0;
-	last = 0;
-	while (str[last] != '\0')
-	{
-		ft_word(str, &first, &last, c);
-		if (last == first)
-			break ;
-		else
-			count++;
-	}
-	return (count);
-}
-
-char	*ft_fill(char const *str, size_t first, size_t last)
-{
-	char	*word;
-	size_t	pos;
-
-	pos = 0;
-	word = malloc(sizeof(char) * (last - first + 1));  // +1 для нулевого символа
-	if (!word)
-		return (NULL);
-	while (first < last)
-	{
-		word[pos++] = str[first++];
-	}
-	word[pos] = '\0';  // Добавляем завершающий нулевой символ
-	return (word);
-}
-
-char	**ft_split(char const *str, char c)
+char	**ft_split(char const *s, char c)
 {
 	char	**res;
-	size_t	first;
-	size_t	last;
-	size_t	pos;
-	size_t	word_count;
+	int		word_count;
+	int		i;
+	int		word_len;
 
-	if (!str)
+	if (!s)
 		return (NULL);
-
-	word_count = ft_count(str, c);  // Вызываем ft_count один раз
-	res = malloc(sizeof(char *) * (word_count + 1));  // +1 для NULL в конце
+	word_count = count_words(s, c);
+	res = (char **)malloc(sizeof(char *) * (word_count + 1));
 	if (!res)
 		return (NULL);
-	last = 0;
-	first = 0;
-	pos = 0;
-	while (pos < word_count)
+	i = 0;
+	while (i < word_count)
 	{
-		ft_word(str, &first, &last, c);
-		if (last == first)
-			break ;
-		res[pos] = ft_fill(str, first, last);
-		if (!res[pos])
-			return (ft_free(res, pos));  // Освобождаем память в случае ошибки
-		pos++;
+		while (*s && *s == c)
+			s++;
+		word_len = get_word_len(s, c);
+		res[i] = (char *)malloc(sizeof(char) * (word_len + 1));
+		if (!res[i])
+			return (handle_malloc_fail(res, i));
+		copy_word(res, s, i++, word_len);
+		s += word_len;
 	}
-	res[pos] = NULL;  // Завершаем массив указателем NULL
+	res[word_count] = NULL;
 	return (res);
 }
-
