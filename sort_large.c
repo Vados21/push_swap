@@ -1,64 +1,52 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   sort_large.c                                       :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: vshpilev <vshpilev@student.hive.fi>        +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/24 11:57:05 by vshpilev          #+#    #+#             */
-/*   Updated: 2024/09/24 11:57:07 by vshpilev         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
 #include "push_swap.h"
 
-int	find_max_digits(t_stack *stack)
+// Функция для подсчета количества битов, необходимых для сортировки
+int calculate_max_bits(int max_value)
 {
-	t_node	*current;
-	int		max_value;
-	int		max_digits;
-
-	current = stack->top;
-	max_value = current->data;
-	max_digits = 0;
-	while (current != NULL)
-	{
-		if (current->data > max_value)
-			max_value = current->data;
-		current = current->next;
-	}
-	while (max_value != 0)
-	{
-		max_value /= 10;
-		max_digits++;
-	}
-	return (max_digits);
+    int bits = 0;
+    while (max_value > 0)
+    {
+        max_value /= 2;
+        bits++;
+    }
+    return bits;
 }
 
+// Основная функция для Radix Sort
 void	radix_sort(t_push_swap *stacks)
 {
-	int	max_digits ;
-	int	size;
-	int	digit_place;
-	int	j;
-	int num;
+    int max_bits = find_max_digits(stacks->a);  // Количество бит
+    int size = stacks->a->size;
+    int i = 0;
 
-	max_digits = find_max_digits(stacks->a);
-	size = stacks->a->size;
-	digit_place = 1;
-	j = 0;
-	num = stacks->a->top->data;
-	while (max_digits--)
-	{
-		while (j < size)
-		{
-			if ((num / digit_place) % 10 < 5)
-				pb(stacks->a, stacks->b);
-			else
-				ra(stacks);
-			j++;
-		}
-		while (stacks->b->size > 0)
-			pa(stacks->a, stacks->b);
-		digit_place *= 10;
-	}
+    while (i < max_bits)
+    {
+        int j = 0;
+
+        while (j < size)
+        {
+            int num = stacks->a->top->data;
+
+            // Если бит на i позиции равен 1
+            if ((num >> i) & 1)
+            {
+                // Оцениваем, нужно ли вращать вперед или назад
+                if (find_min_rotations(stacks->a, j))
+                    ra(stacks);
+                else
+                    rra(stacks);
+            }
+            else
+            {
+                pb(stacks->a, stacks->b);
+            }
+            j++;
+        }
+
+        while (stacks->b->size > 0)
+        {
+            pa(stacks->a, stacks->b);
+        }
+        i++;
+    }
 }

@@ -66,7 +66,7 @@ void	find_mins(t_push_swap *stacks, int *min1, int *min2);
 void	extract_mins(t_push_swap *stacks);
 void	sort_four(t_push_swap *stacks);
 void	sort_five(t_push_swap *stacks);
-int		find_max_bits(t_stack *stack);
+//int		find_max_digits(t_stack *stack);
 void	radix_sort(t_push_swap *stacks);
 void	three_nice(t_push_swap *stacks, int first, int second, int third);
 void	sort_three(t_push_swap *stacks);
@@ -83,9 +83,16 @@ char	**ft_split(char const *str, char c);
 void	swap(t_stack *stack);
 t_stack	*parse_input(int argc, char **argv);
 int is_sorted(t_stack *stack);
-void print_stack(t_stack *stack, char *stack_name);
+void print_stack(t_stack *stack, char *name);
 void free_stack(t_stack *stack);
 void push_to_stack(t_stack *stack, int num);
-int find_max_index(t_stack *stack);
+//int find_max_index(t_stack *stack);
+int calculate_shift_limit(int num);
+void sift_by_nth_bit(t_push_swap *stacks, int shift);
+void move_b_to_a_conditional(t_push_swap *stacks, int shift);
+void move_b_to_a_full(t_push_swap *stacks);
+int	find_min_rotations(t_stack *stack, int target_pos);
+void	move_element_to_top(t_push_swap *stacks, int target_pos);
+int	find_max_digits(t_stack *stack);
 
 #endif

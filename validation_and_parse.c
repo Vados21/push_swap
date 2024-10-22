@@ -11,36 +11,32 @@
 /* ************************************************************************** */
 #include "push_swap.h"
 
-#include "push_swap.h"
-
 void validate_input(int argc, char **argv)
 {
     int i;
     int j;
 
-    // Проверка, что все аргументы являются числами
-    i = 1;
+    i = 0;  // Начинаем с 0 для строки
     while (i < argc)
     {
-        int num = atoi(argv[i]);
-        if (num == 0 && argv[i][0] != '0')  // Проверка некорректных данных
+        int num = ft_atoi(argv[i]);
+        if (num <= 0 || (num == 0 && argv[i][0] != '0'))
         {
-            printf("Error\n");
+            write(1, "Error\n", 6);
             exit(EXIT_FAILURE);
         }
         i++;
     }
 
-    // Проверка на дубликаты
-    i = 1;
+    i = 0;  // Начинаем с 0 для строки
     while (i < argc)
     {
         j = i + 1;
         while (j < argc)
         {
-            if (atoi(argv[i]) == atoi(argv[j]))
+            if (ft_atoi(argv[i]) == ft_atoi(argv[j]))
             {
-                printf("Error\n");
+                write(1, "Error\n", 6);
                 exit(EXIT_FAILURE);
             }
             j++;
@@ -49,10 +45,15 @@ void validate_input(int argc, char **argv)
     }
 }
 
+
+
+
+
 t_stack *parse_input(int argc, char **argv)
 {
     t_stack *stack;
     t_node *new_node;
+    t_node *current;
     int i;
 
     stack = malloc(sizeof(t_stack));
@@ -61,16 +62,30 @@ t_stack *parse_input(int argc, char **argv)
     stack->top = NULL;
     stack->size = 0;
 
-    i = 1;
+    i = 0;
     while (i < argc)
     {
         new_node = malloc(sizeof(t_node));
         if (!new_node)
             exit(EXIT_FAILURE);
-        new_node->data = atoi(argv[i]);  // Преобразование строки в число
-        new_node->next = stack->top;     // Добавление нового узла на вершину стека
-        stack->top = new_node;
+        new_node->data = ft_atoi(argv[i]);
+        new_node->next = NULL;
+
+        // Если стек пустой, новый элемент становится первым
+        if (!stack->top)
+            stack->top = new_node;
+        else
+        {
+            // Ищем конец стека и добавляем новый элемент в конец
+            current = stack->top;
+            while (current->next)
+                current = current->next;
+            current->next = new_node;
+        }
+
         stack->size++;
+        //printf("Added %d to stack, current size: %d\n", new_node->data, stack->size);  // Отладка
+
         i++;
     }
 

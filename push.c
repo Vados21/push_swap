@@ -11,6 +11,19 @@
 /* ************************************************************************** */
 #include "push_swap.h"
 
+
+void print_stack(t_stack *stack, char *name)
+{
+    t_node *current = stack->top;
+    printf("Stack %s: ", name);
+    while (current)
+    {
+        printf("%d ", current->data);
+        current = current->next;
+    }
+    printf("\n");
+}
+
 void	push(t_stack *src, t_stack *dst)
 {
 	t_node	*buf;

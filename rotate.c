@@ -27,20 +27,6 @@ void	rotate(t_stack *stack)
 	last->next = first;
 }
 
-void	print_stack(t_stack *stack, char *stack_name)
-{
-	t_node	*current;
-
-	current = stack->top;
-	printf("Stack %s: ", stack_name);
-	while (current)
-	{
-		printf("%d ", current->data);
-		current = current->next;
-	}
-	printf("\n");
-}
-
 void	ra(t_push_swap *stacks)
 {
 	rotate(stacks->a);

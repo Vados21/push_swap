@@ -46,13 +46,21 @@ void	sort_three(t_push_swap *stacks)
 		stacks->a->top->data,
 		stacks->a->top->next->data,
 		stacks->a->top->next->next->data);
+	print_stack(stacks->a, "a");
 }
 
-void	sort_two(t_push_swap *stacks)
+void sort_two(t_push_swap *stacks)
 {
-	if (stacks->a->top->data > stacks->a->top->next->data)
-	{
-		sa(stacks);
-	}
+    printf("sort_two called\n");  // Отладка
+
+    // Проверяем, что два элемента в стеке действительно нужно поменять местами
+    if (stacks->a->top->data > stacks->a->top->next->data)
+    {
+        //printf("Swapping %d and %d\n", stacks->a->top->data, stacks->a->top->next->data);  // Отладка
+        sa(stacks);  // Меняем местами элементы
+    }
+
+    // Вывод содержимого стека после операции
+    print_stack(stacks->a, "a");
 }
 
