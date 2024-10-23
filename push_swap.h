@@ -94,5 +94,6 @@ void move_b_to_a_full(t_push_swap *stacks);
 int	find_min_rotations(t_stack *stack, int target_pos);
 void	move_element_to_top(t_push_swap *stacks, int target_pos);
 int	find_max_digits(t_stack *stack);
+int is_valid_number(char *str);
 
 #endif

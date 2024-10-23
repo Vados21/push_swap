@@ -11,16 +11,33 @@
 /* ************************************************************************** */
 #include "push_swap.h"
 
+int is_valid_number(char *str)
+{
+    int i = 0;
+
+    if (str[i] == '-' || str[i] == '+')  // Проверяем наличие знака перед числом
+        i++;
+
+    while (str[i])
+    {
+        if (!ft_isdigit(str[i]))  // Если символ не цифра, возвращаем false
+            return (0);
+        i++;
+    }
+    return (1);
+}
+
+
 void validate_input(int argc, char **argv)
 {
     int i;
     int j;
 
-    i = 0;  // Начинаем с 0 для строки
+    // Проверка валидности каждого аргумента
+    i = 1;
     while (i < argc)
     {
-        int num = ft_atoi(argv[i]);
-        if (num <= 0 || (num == 0 && argv[i][0] != '0'))
+        if (!is_valid_number(argv[i]))  // Проверка на валидное число
         {
             write(1, "Error\n", 6);
             exit(EXIT_FAILURE);
@@ -28,7 +45,8 @@ void validate_input(int argc, char **argv)
         i++;
     }
 
-    i = 0;  // Начинаем с 0 для строки
+    // Проверка на дубликаты
+    i = 1;
     while (i < argc)
     {
         j = i + 1;
@@ -44,6 +62,8 @@ void validate_input(int argc, char **argv)
         i++;
     }
 }
+
+
 
 
 

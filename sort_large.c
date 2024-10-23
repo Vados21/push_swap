@@ -1,5 +1,20 @@
 #include "push_swap.h"
 
+// Функция для нахождения максимального значения в стеке
+int find_max_value(t_stack *stack)
+{
+    t_node *current = stack->top;
+    int max_value = current->data;
+
+    while (current != NULL)
+    {
+        if (current->data > max_value)
+            max_value = current->data;
+        current = current->next;
+    }
+    return max_value;
+}
+
 // Функция для подсчета количества битов, необходимых для сортировки
 int calculate_max_bits(int max_value)
 {
@@ -13,9 +28,9 @@ int calculate_max_bits(int max_value)
 }
 
 // Основная функция для Radix Sort
-void	radix_sort(t_push_swap *stacks)
+void radix_sort(t_push_swap *stacks)
 {
-    int max_bits = find_max_digits(stacks->a);  // Количество бит
+    int max_bits = calculate_max_bits(find_max_value(stacks->a));  // Количество бит
     int size = stacks->a->size;
     int i = 0;
 
@@ -30,11 +45,7 @@ void	radix_sort(t_push_swap *stacks)
             // Если бит на i позиции равен 1
             if ((num >> i) & 1)
             {
-                // Оцениваем, нужно ли вращать вперед или назад
-                if (find_min_rotations(stacks->a, j))
-                    ra(stacks);
-                else
-                    rra(stacks);
+                ra(stacks);
             }
             else
             {
@@ -43,10 +54,12 @@ void	radix_sort(t_push_swap *stacks)
             j++;
         }
 
+        // Перемещаем все элементы обратно из стека b в стек a
         while (stacks->b->size > 0)
         {
             pa(stacks->a, stacks->b);
         }
         i++;
     }
+    print_stack(stacks->a, "a");
 }
