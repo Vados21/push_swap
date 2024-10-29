@@ -60,7 +60,6 @@ void	sort_four(t_push_swap *stacks)
 	pb(stacks->a, stacks->b);
 	sort_three(stacks);
 	pa(stacks->a, stacks->b);
-	print_stack(stacks->a, "a"); // debug
 }
 
 void	sort_five(t_push_swap *stacks)
@@ -69,5 +68,4 @@ void	sort_five(t_push_swap *stacks)
 	sort_three(stacks);
 	pa(stacks->a, stacks->b);
 	pa(stacks->a, stacks->b);
-	print_stack(stacks->a, "a"); //debug
 }

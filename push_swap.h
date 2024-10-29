@@ -83,17 +83,21 @@ char	**ft_split(char const *str, char c);
 void	swap(t_stack *stack);
 t_stack	*parse_input(int argc, char **argv);
 int is_sorted(t_stack *stack);
-void print_stack(t_stack *stack, char *name);
 void free_stack(t_stack *stack);
 void push_to_stack(t_stack *stack, int num);
-//int find_max_index(t_stack *stack);
-int calculate_shift_limit(int num);
-void sift_by_nth_bit(t_push_swap *stacks, int shift);
-void move_b_to_a_conditional(t_push_swap *stacks, int shift);
-void move_b_to_a_full(t_push_swap *stacks);
 int	find_min_rotations(t_stack *stack, int target_pos);
 void	move_element_to_top(t_push_swap *stacks, int target_pos);
 int	find_max_digits(t_stack *stack);
 int is_valid_number(char *str);
+void sort_stacks(t_push_swap *stacks);
+void setup_stacks(t_push_swap *stacks);
+void	free_numbers(char **numbers);
+void	initialize_stacks(t_push_swap *stacks, int argc, char **argv);
+void check_duplicates(int argc, char **argv);
+int find_min_value(t_stack *stack);
+int	ft_atoi_ver_2(const char *str);
+t_node	*create_node(int data);
+void	add_node_to_stack(t_stack *stack, t_node *new_node);
+
 
 #endif

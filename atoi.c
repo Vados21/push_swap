@@ -34,11 +34,11 @@ int	ft_atoi_ver_2(const char *str)
 	{
 		res_prev = res;
 		res = res * 10 + (*(str++) - '0');
-		if ((res_prev ^ res) < 0)
+		if ((res_prev ^ res) < 0
+			|| (sign == 1 && res > INT_MAX)
+			|| (sign == -1 && (-res) < INT_MIN))
 		{
-			if (sign > 0)
-				return (-1);
-			return (0);
+			error();
 		}
 	}
 	return ((int)res * sign);

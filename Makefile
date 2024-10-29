@@ -21,7 +21,7 @@ CFLAGS = -Wall -Wextra -Werror
 # Все .c файлы для проекта
 SRCS = push_swap.c \
 	   atoi.c \
-	   errors_func.c \
+	   utility_func.c \
 	   push.c \
 	   reverse_rotate.c \
 	   rotate.c \
@@ -31,21 +31,18 @@ SRCS = push_swap.c \
 	   split.c \
 	   swap.c \
 	   validation_and_parse.c \
+	   error_and_duble.c \
 
 
 
 
 
-# Библиотеки и включаемые файлы (например, libft, если вы используете её)
 LIBFT = libft/libft.a
 
-# Объектные файлы
 OBJS = $(SRCS:.c=.o)
 
-# Цели
 all: $(NAME)
 
-# Создание исполняемого файла
 $(NAME): $(OBJS)
 	$(MAKE) -C libft
 	$(CC) $(CFLAGS) $(OBJS) $(LIBFT) -o $(NAME)

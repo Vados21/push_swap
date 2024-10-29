@@ -11,104 +11,65 @@
 /* ************************************************************************** */
 #include "push_swap.h"
 
-int is_valid_number(char *str)
+void	validate_input(int argc, char **argv)
 {
-    int i = 0;
+	int	i;
+	int	num;
 
-    if (str[i] == '-' || str[i] == '+')  // Проверяем наличие знака перед числом
-        i++;
-
-    while (str[i])
-    {
-        if (!ft_isdigit(str[i]))  // Если символ не цифра, возвращаем false
-            return (0);
-        i++;
-    }
-    return (1);
+	i = 0;
+	while (i < argc)
+	{
+		num = ft_atoi_ver_2(argv[i]);
+		if ((num == 0 && argv[i][0] != '0') || ft_strlen(argv[i]) == 0)
+			error();
+		i++;
+	}
+	check_duplicates(argc, argv);
 }
 
-
-void validate_input(int argc, char **argv)
+t_node	*create_node(int data)
 {
-    int i;
-    int j;
+	t_node	*new_node;
 
-    // Проверка валидности каждого аргумента
-    i = 1;
-    while (i < argc)
-    {
-        if (!is_valid_number(argv[i]))  // Проверка на валидное число
-        {
-            write(1, "Error\n", 6);
-            exit(EXIT_FAILURE);
-        }
-        i++;
-    }
-
-    // Проверка на дубликаты
-    i = 1;
-    while (i < argc)
-    {
-        j = i + 1;
-        while (j < argc)
-        {
-            if (ft_atoi(argv[i]) == ft_atoi(argv[j]))
-            {
-                write(1, "Error\n", 6);
-                exit(EXIT_FAILURE);
-            }
-            j++;
-        }
-        i++;
-    }
+	new_node = malloc(sizeof(t_node));
+	if (!new_node)
+		exit(EXIT_FAILURE);
+	new_node->data = data;
+	new_node->next = NULL;
+	return (new_node);
 }
 
-
-
-
-
-
-
-t_stack *parse_input(int argc, char **argv)
+void	add_node_to_stack(t_stack *stack, t_node *new_node)
 {
-    t_stack *stack;
-    t_node *new_node;
-    t_node *current;
-    int i;
+	t_node	*current;
 
-    stack = malloc(sizeof(t_stack));
-    if (!stack)
-        exit(EXIT_FAILURE);
-    stack->top = NULL;
-    stack->size = 0;
-
-    i = 0;
-    while (i < argc)
-    {
-        new_node = malloc(sizeof(t_node));
-        if (!new_node)
-            exit(EXIT_FAILURE);
-        new_node->data = ft_atoi(argv[i]);
-        new_node->next = NULL;
-
-        // Если стек пустой, новый элемент становится первым
-        if (!stack->top)
-            stack->top = new_node;
-        else
-        {
-            // Ищем конец стека и добавляем новый элемент в конец
-            current = stack->top;
-            while (current->next)
-                current = current->next;
-            current->next = new_node;
-        }
-
-        stack->size++;
-        //printf("Added %d to stack, current size: %d\n", new_node->data, stack->size);  // Отладка
-
-        i++;
-    }
-
-    return stack;
+	if (!stack->top)
+		stack->top = new_node;
+	else
+	{
+		current = stack->top;
+		while (current->next)
+			current = current->next;
+		current->next = new_node;
+	}
+	stack->size++;
 }
 
+t_stack	*parse_input(int argc, char **argv)
+{
+	t_stack	*stack;
+	int		i;
+
+	stack = malloc(sizeof(t_stack));
+	if (!stack)
+		exit(EXIT_FAILURE);
+	stack->top = NULL;
+	stack->size = 0;
+	i = 0;
+	while (i < argc)
+	{
+		add_node_to_stack(stack, create_node(ft_atoi_ver_2(argv[i])));
+		i++;
+	}
+	return (stack);
+}

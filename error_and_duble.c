@@ -1,14 +1,15 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   errors_func.c                                      :+:      :+:    :+:   */
+/*   error_and_duble.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vshpilev <vshpilev@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/13 12:57:55 by vshpilev          #+#    #+#             */
-/*   Updated: 2024/09/13 12:57:58 by vshpilev         ###   ########.fr       */
+/*   Created: 2024/10/29 13:58:52 by vshpilev          #+#    #+#             */
+/*   Updated: 2024/10/29 13:58:54 by vshpilev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #include "push_swap.h"
 
 void	error(void)
@@ -17,17 +18,25 @@ void	error(void)
 	exit(1);
 }
 
-void	free_stack(t_stack *stack)
+void	check_duplicates(int argc, char **argv)
 {
-	t_node	*current;
-	t_node	*next;
+	int	i;
+	int	j;
+	int	num1;
+	int	num2;
 
-	current = stack->top;
-	while (current != NULL)
+	i = 0;
+	while (i < argc - 1)
 	{
-		next = current->next;
-		free(current);
-		current = next;
+		num1 = ft_atoi(argv[i]);
+		j = i + 1;
+		while (j < argc)
+		{
+			num2 = ft_atoi(argv[j]);
+			if (num1 == num2)
+				error();
+			j++;
+		}
+		i++;
 	}
-	free(stack);
 }
