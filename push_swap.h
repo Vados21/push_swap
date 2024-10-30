@@ -67,7 +67,7 @@ void	extract_mins(t_push_swap *stacks);
 void	sort_four(t_push_swap *stacks);
 void	sort_five(t_push_swap *stacks);
 //int		find_max_digits(t_stack *stack);
-void	radix_sort(t_push_swap *stacks);
+void radix_sort(t_push_swap *stacks);
 void	three_nice(t_push_swap *stacks, int first, int second, int third);
 void	sort_three(t_push_swap *stacks);
 void	sort_two(t_push_swap *stacks);
@@ -88,7 +88,7 @@ void push_to_stack(t_stack *stack, int num);
 int	find_min_rotations(t_stack *stack, int target_pos);
 void	move_element_to_top(t_push_swap *stacks, int target_pos);
 int	find_max_digits(t_stack *stack);
-int is_valid_number(char *str);
+
 void sort_stacks(t_push_swap *stacks);
 void setup_stacks(t_push_swap *stacks);
 void	free_numbers(char **numbers);
@@ -98,6 +98,14 @@ int find_min_value(t_stack *stack);
 int	ft_atoi_ver_2(const char *str);
 t_node	*create_node(int data);
 void	add_node_to_stack(t_stack *stack, t_node *new_node);
+void normalize_values(t_stack *stack, int min_value);
+void restore_values(t_stack *stack, int min_value);
+void perform_bit_shift(t_push_swap *stacks, int bit);
+int	calculate_max_bits(int max_value);
+int	find_min_value(t_stack *stack);
+int	find_max_value(t_stack *stack);
+int	is_number(char *str);
+
 
 
 #endif

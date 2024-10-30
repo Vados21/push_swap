@@ -9,7 +9,6 @@
 /*   Updated: 2024/10/28 14:08:32 by vshpilev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 #include "push_swap.h"
 
 int	find_min_rotations(t_stack *stack, int target_pos)

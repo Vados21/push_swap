@@ -11,6 +11,22 @@
 /* ************************************************************************** */
 #include "push_swap.h"
 
+int	is_number(char *str)
+{
+	int	i;
+
+	i = 0;
+	if (str[0] == '-' || str[0] == '+')
+		i++;
+	while (str[i])
+	{
+		if (!ft_isdigit(str[i]))
+			return (0);
+		i++;
+	}
+	return (1);
+}
+
 void	validate_input(int argc, char **argv)
 {
 	int	i;
@@ -19,6 +35,8 @@ void	validate_input(int argc, char **argv)
 	i = 0;
 	while (i < argc)
 	{
+		if (!is_number(argv[i]))
+			error();
 		num = ft_atoi_ver_2(argv[i]);
 		if ((num == 0 && argv[i][0] != '0') || ft_strlen(argv[i]) == 0)
 			error();

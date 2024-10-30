@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sort_large.c                                       :+:      :+:    :+:   */
+/*   radix_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vshpilev <vshpilev@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/28 14:28:34 by vshpilev          #+#    #+#             */
-/*   Updated: 2024/10/28 14:28:36 by vshpilev         ###   ########.fr       */
+/*   Created: 2024/10/30 16:50:14 by vshpilev          #+#    #+#             */
+/*   Updated: 2024/10/30 16:50:18 by vshpilev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "push_swap.h"
@@ -56,43 +56,26 @@ int	find_min_value(t_stack *stack)
 	return (min_value);
 }
 
-void	radix_sort(t_push_swap *stacks)
+void	normalize_values(t_stack *stack, int min_value)
 {
-    int min_value = find_min_value(stacks->a);
-    int max_bits = calculate_max_bits(find_max_value(stacks->a) - min_value);
-    int size = stacks->a->size;
-    int i = 0;
+	t_node	*current;
 
-    t_node *current = stacks->a->top;
-    while (current != NULL)
-    {
-        current->data -= min_value;
-        current = current->next;
-    }
-
-    while (i < max_bits)
-    {
-        int j = 0;
-        while (j < size)
-        {
-            int num = stacks->a->top->data;
-
-            if ((num >> i) & 1)
-                ra(stacks);
-            else
-                pb(stacks->a, stacks->b);
-            j++;
-        }
-        
-        while (stacks->b->size > 0)
-            pa(stacks->a, stacks->b);
-        i++;
-    }
-    current = stacks->a->top;
-    while (current != NULL)
-    {
-        current->data += min_value;
-        current = current->next;
-    }
+	current = stack->top;
+	while (current != NULL)
+	{
+		current->data -= min_value;
+		current = current->next;
+	}
 }
 
+void	restore_values(t_stack *stack, int min_value)
+{
+	t_node	*current;
+
+	current = stack->top;
+	while (current != NULL)
+	{
+		current->data += min_value;
+		current = current->next;
+	}
+}
