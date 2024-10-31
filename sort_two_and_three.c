@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 #include "push_swap.h"
 
-void	three_nice(t_push_swap *stacks, int first, int second, int third)
+void	sort_stack_of_three(t_push_swap *stacks, int first, int second, int third)
 {
 	if (first > second)
 	{
@@ -42,7 +42,7 @@ void	three_nice(t_push_swap *stacks, int first, int second, int third)
 
 void	sort_three(t_push_swap *stacks)
 {
-	three_nice(stacks,
+	sort_stack_of_three(stacks,
 		stacks->a->top->data,
 		stacks->a->top->next->data,
 		stacks->a->top->next->next->data);

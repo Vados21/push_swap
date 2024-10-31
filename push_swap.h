@@ -20,34 +20,32 @@
 # include <stdio.h>
 # include <string.h>
 
-// Определение узла стека
+// structs
 typedef struct s_node
 {
     int				data;
     struct s_node	*next;
 }				t_node;
 
-// Определение стека
 typedef struct s_stack
 {
-    t_node	*top;
-    int		size;
+	t_node	*top;
+	int		size;
 }				t_stack;
 
-// Определение структуры push_swap
-typedef struct s_push_swap
+typedef struct	s_push_swap
 {
 	t_stack	*a;
 	t_stack	*b;
-    int operation_count;
+	int		operation_count;
 }				t_push_swap;
 
-// Операции со стеками
+// operations with stacks
 void	sa(t_push_swap *stacks);
 void	sb(t_push_swap *stacks);
 void	ss(t_push_swap *stacks);
-void    pa(t_stack *a, t_stack *b);
-void    pb(t_stack *a, t_stack *b);
+void	pa(t_stack *a, t_stack *b);
+void	pb(t_stack *a, t_stack *b);
 void	ra(t_push_swap *stacks);
 void	rb(t_push_swap *stacks);
 void	rr(t_push_swap *stacks);
@@ -55,57 +53,43 @@ void	rra(t_push_swap *stacks);
 void	rrb(t_push_swap *stacks);
 void	rrr(t_push_swap *stacks);
 
-// Вспомогательные функции
-void	error(void);
-void    validate_input(int argc, char **argv);
-int		main(int argc, char **argv);
-void    push(t_stack *src, t_stack *dst);
-void    reverse_rotate(t_stack *stack);
-void	rotate(t_stack *stack);
-void	find_mins(t_push_swap *stacks, int *min1, int *min2);
-void	extract_mins(t_push_swap *stacks);
+// main functions
+void	sort_two(t_push_swap *stacks);
+void	sort_stack_of_three(t_push_swap *stacks, int first, int second, int third);
+void	sort_three(t_push_swap *stacks);
 void	sort_four(t_push_swap *stacks);
 void	sort_five(t_push_swap *stacks);
-//int		find_max_digits(t_stack *stack);
-void radix_sort(t_push_swap *stacks);
-void	three_nice(t_push_swap *stacks, int first, int second, int third);
-void	sort_three(t_push_swap *stacks);
-void	sort_two(t_push_swap *stacks);
+void	radix_sort(t_push_swap *stacks);
 
-// Функции для работы со строками
-void	*ft_free(char **res, size_t pos);
-void	ft_word(char const *str, size_t *first, size_t *last, char c);
-size_t	ft_count(char const *str, char c);
-char	*ft_fill(char const *str, size_t first, size_t last);
-char	**ft_split(char const *str, char c);
-
-// Вспомогательные функции для стека
+// utils for sort
+void	push(t_stack *src, t_stack *dst);
+void	reverse_rotate(t_stack *stack);
+void	rotate(t_stack *stack);
 void	swap(t_stack *stack);
-t_stack	*parse_input(int argc, char **argv);
-int is_sorted(t_stack *stack);
-void free_stack(t_stack *stack);
-void push_to_stack(t_stack *stack, int num);
-int	find_min_rotations(t_stack *stack, int target_pos);
-void	move_element_to_top(t_push_swap *stacks, int target_pos);
-int	find_max_digits(t_stack *stack);
-
-void sort_stacks(t_push_swap *stacks);
-void setup_stacks(t_push_swap *stacks);
-void	free_numbers(char **numbers);
+void	sort_stacks(t_push_swap *stacks);
 void	initialize_stacks(t_push_swap *stacks, int argc, char **argv);
-void check_duplicates(int argc, char **argv);
-int find_min_value(t_stack *stack);
-int	ft_atoi_ver_2(const char *str);
-t_node	*create_node(int data);
+
+// additional utils
+void	validate_input(int argc, char **argv);
+void	check_duplicates(int argc, char **argv);
+void	error(void);
+int		is_sorted(t_stack *stack);
+int		is_number(char *str);
+
+// parsing and stack functions
+t_stack	*parse_input(int argc, char **argv);
+void	free_stack(t_stack *stack);
 void	add_node_to_stack(t_stack *stack, t_node *new_node);
-void normalize_values(t_stack *stack, int min_value);
-void restore_values(t_stack *stack, int min_value);
-void perform_bit_shift(t_push_swap *stacks, int bit);
-int	calculate_max_bits(int max_value);
-int	find_min_value(t_stack *stack);
-int	find_max_value(t_stack *stack);
-int	is_number(char *str);
+void	push_to_stack(t_stack *stack, int num);
+void	free_numbers(char **numbers);
+int		ft_atoi_ver_2(const char *str);
 
-
+// utils to find values
+int		find_max_value(t_stack *stack);
+int		find_min_value(t_stack *stack);
+int		calculate_max_bits(int max_value);
+void	normalize_values(t_stack *stack, int min_value);
+void	restore_values(t_stack *stack, int min_value);
 
 #endif
+
