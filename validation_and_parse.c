@@ -51,7 +51,7 @@ t_node	*create_node(int data)
 
 	new_node = malloc(sizeof(t_node));
 	if (!new_node)
-		exit(EXIT_FAILURE);
+		error();
 	new_node->data = data;
 	new_node->next = NULL;
 	return (new_node);
@@ -80,7 +80,7 @@ t_stack	*parse_input(int argc, char **argv)
 
 	stack = malloc(sizeof(t_stack));
 	if (!stack)
-		exit(EXIT_FAILURE);
+		error();
 	stack->top = NULL;
 	stack->size = 0;
 	i = 0;

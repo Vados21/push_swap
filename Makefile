@@ -20,7 +20,7 @@ CFLAGS = -Wall -Wextra -Werror
 
 # Все .c файлы для проекта
 SRCS = push_swap.c \
-	   atoi.c \
+	   ft_atoi_ver_2.c \
 	   utility_func.c \
 	   push.c \
 	   reverse_rotate.c \
@@ -34,10 +34,6 @@ SRCS = push_swap.c \
 	   error_and_duble.c \
 	   radix_utils.c \
 
-
-
-
-
 LIBFT = libft/libft.a
 
 OBJS = $(SRCS:.c=.o)
@@ -48,20 +44,16 @@ $(NAME): $(OBJS)
 	$(MAKE) -C libft
 	$(CC) $(CFLAGS) $(OBJS) $(LIBFT) -o $(NAME)
 
-# Удаление объектных файлов
 clean:
 	$(MAKE) -C libft clean
 	rm -f $(OBJS)
 
-# Удаление объектных файлов и исполняемого файла
 fclean: clean
 	$(MAKE) -C libft fclean
 	rm -f $(NAME)
 
-# Пересборка
 re: fclean all
 
-# Правило для компиляции .o файлов
 %.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@
 

@@ -73,6 +73,7 @@ void	initialize_stacks(t_push_swap *stacks, int argc, char **argv);
 void	validate_input(int argc, char **argv);
 void	check_duplicates(int argc, char **argv);
 void	error(void);
+void	free_all_nodes(t_node *head);
 int		is_sorted(t_stack *stack);
 int		is_number(char *str);
 
