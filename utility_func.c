@@ -46,6 +46,11 @@ int	is_sorted(t_stack *stack)
 void	setup_stacks(t_push_swap *stacks)
 {
 	stacks->b = malloc(sizeof(t_stack));
+	if(!stacks->b)
+	{
+		free_stack_on_error(stacks->a);
+		error();
+	}
 	stacks->b->top = NULL;
 	stacks->b->size = 0;
 }
@@ -81,6 +86,11 @@ void	initialize_stacks(t_push_swap *stacks, int argc, char **argv)
 		stacks->a = parse_input(argc - 1, argv + 1);
 	}
 	stacks->b = malloc(sizeof(t_stack));
+	if(!stacks->b)
+	{
+		free_stack_on_error(stacks->a);
+		error();
+	}
 	stacks->b->top = NULL;
 	stacks->b->size = 0;
 }

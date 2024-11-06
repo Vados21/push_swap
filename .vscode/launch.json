@@ -6,7 +6,7 @@
             "type": "cppdbg",
             "request": "launch",
 			"program": "/home/vshpilev/Documents/push_swap/push_swap",
-            "args": ["99", "-2147483648", "23", "545"],
+            "args": ["2", "34", "-24124", "234324", "09"],
             "stopAtEntry": true,
             "cwd": "${workspaceFolder}",
             "environment": [],

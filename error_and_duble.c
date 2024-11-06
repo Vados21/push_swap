@@ -40,3 +40,20 @@ void	check_duplicates(int argc, char **argv)
 		i++;
 	}
 }
+
+void	free_stack_on_error(t_stack *stack)
+{
+	t_node	*current;
+	t_node	*next;
+
+	current = stack->top;
+	while (current)
+	{
+		next = current->next;
+		free(current);
+		current = next;
+	}
+	stack->top = NULL;
+	stack->size = 0;
+	free(stack);
+}
