@@ -14,9 +14,9 @@
 
 void	perform_bit_shift(t_push_swap *stacks, int bit)
 {
-	int j;
-	int size;
-	long long int num;  // Изменено на long long int
+	int				j;
+	int				size;
+	long long int	num;
 
 	j = 0;
 	size = stacks->a->size;
@@ -35,9 +35,9 @@ void	perform_bit_shift(t_push_swap *stacks, int bit)
 
 void	radix_sort(t_push_swap *stacks)
 {
-	long long int min_value;  // Изменено на long long int
-	int max_bits;
-	int i;
+	long long int	min_value;
+	int				max_bits;
+	int				i;
 
 	min_value = find_min_value(stacks->a);
 	normalize_values(stacks->a, min_value);
@@ -50,4 +50,3 @@ void	radix_sort(t_push_swap *stacks)
 	}
 	restore_values(stacks->a, min_value);
 }
-

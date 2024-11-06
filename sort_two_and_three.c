@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 #include "push_swap.h"
 
-void	sort_stack_of_three(t_push_swap *stacks, int first, int second, int third)
+void	theree_sort(t_push_swap *stacks, int first, int second, int third)
 {
 	if (first > second)
 	{
@@ -42,7 +42,7 @@ void	sort_stack_of_three(t_push_swap *stacks, int first, int second, int third)
 
 void	sort_three(t_push_swap *stacks)
 {
-	sort_stack_of_three(stacks,
+	theree_sort(stacks,
 		stacks->a->top->data,
 		stacks->a->top->next->data,
 		stacks->a->top->next->next->data);

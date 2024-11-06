@@ -16,15 +16,12 @@ int	is_number(char *str)
 	int	i;
 
 	if (!str || ft_strlen(str) == 0)
-		return (0); // Пустая строка не является числом
-	
+		return (0);
 	i = 0;
 	if (str[0] == '-' || str[0] == '+')
 		i++;
-	
-	if (!str[i]) // Если строка состоит только из знака, это не число
+	if (!str[i])
 		return (0);
-	
 	while (str[i])
 	{
 		if (!ft_isdigit(str[i]))
@@ -34,27 +31,23 @@ int	is_number(char *str)
 	return (1);
 }
 
-
 void	validate_input(int argc, char **argv)
 {
-	int	i;
+	int				i;
 	long long int	num;
 
 	i = 0;
 	while (i < argc)
 	{
-		if (!is_number(argv[i])) // Проверка на то, что это число
+		if (!is_number(argv[i]))
 			error();
-
 		num = ft_atoi_ver_2(argv[i]);
 		if (num < INT_MIN || num > INT_MAX)
 			error();
-
 		i++;
 	}
 	check_duplicates(argc, argv);
 }
-
 
 t_node	*create_node(int data)
 {

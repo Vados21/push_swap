@@ -34,11 +34,11 @@ long long int	ft_atoi_ver_2(const char *str)
 	while (*str >= '0' && *str <= '9')
 	{
 		res = res * 10 + (*(str++) - '0');
-		if ((sign == 1 && res > INT_MAX) || ((sign == -1) && ((res * sign) < INT_MIN)))
+		if ((sign == 1 && res > INT_MAX)
+			|| ((sign == -1) && ((res * sign) < INT_MIN)))
 		{
 			error();
 		}
 	}
 	return (res * sign);
 }
-

@@ -13,8 +13,8 @@
 
 long long int	find_max_value(t_stack *stack)
 {
-	t_node	*current;
-	long long int		max_value;
+	t_node			*current;
+	long long int	max_value;
 
 	current = stack->top;
 	max_value = current->data;
@@ -59,6 +59,7 @@ int	find_min_value(t_stack *stack)
 void	normalize_values(t_stack *stack, long long int min_value)
 {
 	t_node	*current;
+
 	current = stack->top;
 	while (current != NULL)
 	{
@@ -66,8 +67,6 @@ void	normalize_values(t_stack *stack, long long int min_value)
 		current = current->next;
 	}
 }
-
-
 
 void	restore_values(t_stack *stack, int min_value)
 {
