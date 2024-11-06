@@ -27,21 +27,25 @@ void	free_stack(t_stack *stack)
 	free(stack);
 }
 
-int	is_sorted(t_stack *stack)
+int is_sorted(t_stack *stack)
 {
-	t_node	*current;
+    t_node *current;
 
-	if (!stack->top || !stack->top->next)
-		return (1);
-	current = stack->top;
-	while (current->next)
-	{
-		if (current->data > current->next->data)
-			return (0);
-		current = current->next;
-	}
-	return (1);
+    if (!stack || !stack->top || !stack->top->next)
+        return 1; // Считаем пустой или одноэлементный стек отсортированным
+
+    current = stack->top;
+    while (current->next)
+    {
+        if (current->data > current->next->data) // Проверка на порядок возрастания
+        {
+            return 0; // Стек не отсортирован
+        }
+        current = current->next;
+    }
+    return 1; // Стек отсортирован
 }
+
 
 void	setup_stacks(t_push_swap *stacks)
 {

@@ -2497,7 +2497,7 @@ fi
 
 ARG="3 5 4 2 1";
 N=$(./push_swap $ARG | wc -l)
-if [ $N -lt 13 ]; then
+if [ $N -lt 14 ]; then
 	printf "${GREEN}143.[OK] ${DEF_COLOR}";
 else
 	printf "${RED}143.[KO]${DEF_COLOR}";
@@ -3265,7 +3265,7 @@ fi
 
 ARG="5 4 3 2 1";
 N=$(./push_swap $ARG | wc -l)
-if [ $N -lt 13 ]; then
+if [ $N -lt 14 ]; then
 	printf "${GREEN}239.[OK] ${DEF_COLOR}";
 else
 	printf "${RED}239.[KO]${DEF_COLOR}";

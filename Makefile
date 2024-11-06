@@ -16,7 +16,7 @@ NAME = push_swap
 
 # Компилятор и флаги
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -O0 -g
 
 # Все .c файлы для проекта
 SRCS = push_swap.c \

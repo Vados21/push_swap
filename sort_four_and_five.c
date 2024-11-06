@@ -11,12 +11,12 @@
 /* ************************************************************************** */
 #include "push_swap.h"
 
-void	find_mins(t_push_swap *stacks, int *min1, int *min2)
+void	find_mins(t_push_swap *stacks, long long int *min1, long long int *min2)
 {
 	t_node	*tmp;
 
-	*min1 = INT_MAX;
-	*min2 = INT_MAX;
+	*min1 = LLONG_MAX;
+	*min2 = LLONG_MAX;
 	tmp = stacks->a->top;
 	while (tmp)
 	{
@@ -35,9 +35,9 @@ void	find_mins(t_push_swap *stacks, int *min1, int *min2)
 
 void	extract_mins(t_push_swap *stacks)
 {
-	int	min1;
-	int	min2;
-	int	rotations;
+	long long int min1;
+	long long int min2;
+	int rotations;
 
 	find_mins(stacks, &min1, &min2);
 	rotations = 0;
@@ -62,8 +62,8 @@ void	sort_five(t_push_swap *stacks)
 
 void	sort_four(t_push_swap *stacks)
 {
-	int	min1;
-	int	min2;
+	long long int min1;
+	long long int min2;
 
 	find_mins(stacks, &min1, &min2);
 	while (stacks->a->top->data != min1)
@@ -72,3 +72,4 @@ void	sort_four(t_push_swap *stacks)
 	sort_three(stacks);
 	pa(stacks->a, stacks->b);
 }
+

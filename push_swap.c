@@ -74,6 +74,7 @@ void	sort_stacks(t_push_swap *stacks)
 {
 	if (is_sorted(stacks->a))
 	{
+		//printf("wtf");
 		free_stack(stacks->a);
 		free_stack(stacks->b);
 		exit(0);
@@ -92,13 +93,19 @@ void	sort_stacks(t_push_swap *stacks)
 
 int	main(int argc, char **argv)
 {
-	t_push_swap	stacks;
+    t_push_swap stacks;
 
-	if (argc < 2)
-		return (write(1, "Error\n", 6), 1);
-	initialize_stacks(&stacks, argc, argv);
-	sort_stacks(&stacks);
-	free_stack(stacks.a);
-	free_stack(stacks.b);
-	return (0);
+    // Если нет параметров, программа просто завершает выполнение
+    if (argc < 2)
+        return (0);
+
+    // Если передана пустая строка как единственный аргумент, завершение программы без вывода
+    if (argc == 2 && argv[1][0] == '\0')
+        return (0);
+
+    initialize_stacks(&stacks, argc, argv);
+    sort_stacks(&stacks);
+    free_stack(stacks.a);
+    free_stack(stacks.b);
+    return (0);
 }

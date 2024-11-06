@@ -9,7 +9,6 @@
 /*   Updated: 2024/10/31 17:02:38 by vshpilev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 #include "push_swap.h"
 
 static char	is_whitespace(char c)
@@ -18,29 +17,28 @@ static char	is_whitespace(char c)
 		|| c == '\f');
 }
 
-int	ft_atoi_ver_2(const char *str)
+long long int	ft_atoi_ver_2(const char *str)
 {
-	char		sign;
-	long long	res;
-	long long	res_prev;
+	int				sign;
+	long long int	res;
 
 	sign = 1;
 	res = 0;
 	while (is_whitespace(*str))
 		str++;
 	if (*str == '-' || *str == '+')
+	{
 		if (*(str++) == '-')
 			sign = -1;
+	}
 	while (*str >= '0' && *str <= '9')
 	{
-		res_prev = res;
 		res = res * 10 + (*(str++) - '0');
-		if ((res_prev ^ res) < 0
-			|| (sign == 1 && res > INT_MAX)
-			|| (sign == -1 && (-res) < INT_MIN))
+		if ((sign == 1 && res > INT_MAX) || ((sign == -1) && ((res * sign) < INT_MIN)))
 		{
 			error();
 		}
 	}
-	return ((int)res * sign);
+	return (res * sign);
 }
+

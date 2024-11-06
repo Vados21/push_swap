@@ -23,14 +23,14 @@
 // structs
 typedef struct s_node
 {
-    int				data;
+    long long int				data;
     struct s_node	*next;
 }				t_node;
 
 typedef struct s_stack
 {
 	t_node	*top;
-	int		size;
+	long long int		size;
 }				t_stack;
 
 typedef struct	s_push_swap
@@ -83,13 +83,13 @@ void	free_stack(t_stack *stack);
 void	add_node_to_stack(t_stack *stack, t_node *new_node);
 void	push_to_stack(t_stack *stack, int num);
 void	free_numbers(char **numbers);
-int		ft_atoi_ver_2(const char *str);
+long long int	ft_atoi_ver_2(const char *str);
 
 // utils to find values
-int		find_max_value(t_stack *stack);
+long long int	find_max_value(t_stack *stack);
 int		find_min_value(t_stack *stack);
-int		calculate_max_bits(int max_value);
-void	normalize_values(t_stack *stack, int min_value);
+long long int	calculate_max_bits(long long int max_value);
+void	normalize_values(t_stack *stack, long long int min_value);
 void	restore_values(t_stack *stack, int min_value);
 
 #endif

@@ -11,10 +11,10 @@
 /* ************************************************************************** */
 #include "push_swap.h"
 
-int	find_max_value(t_stack *stack)
+long long int	find_max_value(t_stack *stack)
 {
 	t_node	*current;
-	int		max_value;
+	long long int		max_value;
 
 	current = stack->top;
 	max_value = current->data;
@@ -27,7 +27,7 @@ int	find_max_value(t_stack *stack)
 	return (max_value);
 }
 
-int	calculate_max_bits(int max_value)
+long long int	calculate_max_bits(long long int max_value)
 {
 	int	bits;
 
@@ -56,10 +56,9 @@ int	find_min_value(t_stack *stack)
 	return (min_value);
 }
 
-void	normalize_values(t_stack *stack, int min_value)
+void	normalize_values(t_stack *stack, long long int min_value)
 {
 	t_node	*current;
-
 	current = stack->top;
 	while (current != NULL)
 	{
@@ -67,6 +66,8 @@ void	normalize_values(t_stack *stack, int min_value)
 		current = current->next;
 	}
 }
+
+
 
 void	restore_values(t_stack *stack, int min_value)
 {
