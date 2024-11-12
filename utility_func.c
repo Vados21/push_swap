@@ -48,7 +48,6 @@ void	setup_stacks(t_push_swap *stacks)
 	stacks->b = malloc(sizeof(t_stack));
 	if(!stacks->b)
 	{
-		printf("setup_stacks");
 		free_stack_on_error(stacks->a);
 		error();
 	}
@@ -68,31 +67,35 @@ void	free_numbers(char **numbers)
 
 void	initialize_stacks(t_push_swap *stacks, int argc, char **argv)
 {
-	char	**numbers;
+	char	**numbers = NULL;
 	int		new_argc;
 
 	if (argc == 2)
 	{
 		new_argc = 0;
 		numbers = ft_split(argv[1], ' ');
+		if (!numbers)
+			error();
 		while (numbers[new_argc])
 			new_argc++;
-		validate_input(new_argc, numbers);
+		validate_input(new_argc, numbers, numbers);
 		stacks->a = parse_input(new_argc, numbers);
 		free_numbers(numbers);
 	}
 	else
 	{
-		validate_input(argc - 1, argv + 1);
+		validate_input(argc - 1, argv + 1, NULL);
 		stacks->a = parse_input(argc - 1, argv + 1);
 	}
+
 	stacks->b = malloc(sizeof(t_stack));
-	if(!stacks->b)
+	if (!stacks->b)
 	{
-		printf("initialize_stacks");
 		free_stack_on_error(stacks->a);
 		error();
 	}
 	stacks->b->top = NULL;
 	stacks->b->size = 0;
 }
+
+

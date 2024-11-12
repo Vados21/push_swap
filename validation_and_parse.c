@@ -31,7 +31,7 @@ int	is_number(char *str)
 	return (1);
 }
 
-void	validate_input(int argc, char **argv)
+void	validate_input(int argc, char **argv, char **numbers)
 {
 	int				i;
 	long long int	num;
@@ -41,21 +41,23 @@ void	validate_input(int argc, char **argv)
 	{
 		if (!is_number(argv[i]))
 		{
-			printf("validate_input1");
+			if (numbers)
+				free_numbers(numbers);
 			error();
 		}
 			
 		num = ft_atoi_ver_2(argv[i]);
 		if (num < INT_MIN || num > INT_MAX)
 		{
+			if (numbers)
+				free_numbers(numbers);
 			error();
-			printf("validate_input2");
 		}
-			
 		i++;
 	}
-	check_duplicates(argc, argv);
+	check_duplicates(argc, argv, numbers);
 }
+
 
 t_node	*create_node(int data)
 {
