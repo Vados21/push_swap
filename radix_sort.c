@@ -36,14 +36,17 @@ void	perform_bit_shift(t_push_swap *stacks, int bit)
 void	radix_sort(t_push_swap *stacks)
 {
 	long long int	min_value;
-	int				max_bits;
+	long long int	max_bits;
 	int				i;
 
 	min_value = find_min_value(stacks->a);
-	normalize_values(stacks->a, min_value);
-	max_bits = calculate_max_bits(find_max_value(stacks->a) - min_value);
+	if(min_value < 0)
+	{
+		normalize_values(stacks->a, min_value);
+	}
+	max_bits = calculate_max_bits(find_max_value(stacks->a));
 	i = 0;
-	while (i < max_bits)
+	while (i <= max_bits)
 	{
 		perform_bit_shift(stacks, i);
 		i++;

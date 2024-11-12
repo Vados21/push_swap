@@ -38,6 +38,7 @@ long long int	ft_atoi_ver_2(const char *str)
 			|| ((sign == -1) && ((res * sign) < INT_MIN)))
 		{
 			error();
+			//printf("atoi");
 		}
 	}
 	return (res * sign);

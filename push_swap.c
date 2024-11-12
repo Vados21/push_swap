@@ -88,6 +88,11 @@ void	sort_stacks(t_push_swap *stacks)
 		sort_five(stacks);
 	else
 		radix_sort(stacks);
+	//if (!is_sorted(stacks->a))
+	//{
+		//printf("Error: Stack is not sorted after sorting algorithm\n");
+	//	error();
+	//}
 }
 
 int	main(int argc, char **argv)
@@ -97,7 +102,11 @@ int	main(int argc, char **argv)
 	if (argc < 2)
 		return (0);
 	if (argc == 2 && argv[1][0] == '\0')
+	{
+		printf("main");
 		error();
+	}
+		
 	initialize_stacks(&stacks, argc, argv);
 	sort_stacks(&stacks);
 	free_stack(stacks.a);

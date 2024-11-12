@@ -40,10 +40,18 @@ void	validate_input(int argc, char **argv)
 	while (i < argc)
 	{
 		if (!is_number(argv[i]))
+		{
+			printf("validate_input1");
 			error();
+		}
+			
 		num = ft_atoi_ver_2(argv[i]);
 		if (num < INT_MIN || num > INT_MAX)
+		{
 			error();
+			printf("validate_input2");
+		}
+			
 		i++;
 	}
 	check_duplicates(argc, argv);
@@ -55,7 +63,10 @@ t_node	*create_node(int data)
 
 	new_node = malloc(sizeof(t_node));
 	if (!new_node)
+	{
+		printf("create_node");
 		error();
+	}
 	new_node->data = data;
 	new_node->next = NULL;
 	return (new_node);
@@ -84,7 +95,12 @@ t_stack	*parse_input(int argc, char **argv)
 
 	stack = malloc(sizeof(t_stack));
 	if (!stack)
+	{
+		printf("parse_input");
 		error();
+		
+	}
+		
 	stack->top = NULL;
 	stack->size = 0;
 	i = 0;

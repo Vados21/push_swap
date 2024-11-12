@@ -48,6 +48,7 @@ void	setup_stacks(t_push_swap *stacks)
 	stacks->b = malloc(sizeof(t_stack));
 	if(!stacks->b)
 	{
+		printf("setup_stacks");
 		free_stack_on_error(stacks->a);
 		error();
 	}
@@ -88,6 +89,7 @@ void	initialize_stacks(t_push_swap *stacks, int argc, char **argv)
 	stacks->b = malloc(sizeof(t_stack));
 	if(!stacks->b)
 	{
+		printf("initialize_stacks");
 		free_stack_on_error(stacks->a);
 		error();
 	}
