@@ -67,7 +67,10 @@ char	**ft_split(char const *s, char c)
 	word_count = count_words(s, c);
 	res = (char **)malloc(sizeof(char *) * (word_count + 1));
 	if (!res)
+	{
+		handle_malloc_fail(res, i);
 		return (NULL);
+	}
 	i = 0;
 	while (i < word_count)
 	{

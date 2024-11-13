@@ -52,7 +52,10 @@ void	push_to_stack(t_stack *stack, int num)
 
 	new_node = malloc(sizeof(t_node));
 	if (!new_node)
-		return ;
+	{
+		free_stack_on_error(stack);
+		error();
+	}
 	new_node->data = num;
 	new_node->next = NULL;
 	if (!stack->top)

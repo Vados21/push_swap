@@ -82,6 +82,8 @@ void			free_stack(t_stack *stack);
 void			add_node_to_stack(t_stack *stack, t_node *new_node);
 void			push_to_stack(t_stack *stack, int num);
 void			free_numbers(char **numbers);
+void			initialize_stack_b(t_push_swap *stacks);
+int				count_numbers(char **numbers);
 
 // utils to find values
 
