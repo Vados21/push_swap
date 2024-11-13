@@ -40,7 +40,7 @@ void	radix_sort(t_push_swap *stacks)
 	int				i;
 
 	min_value = find_min_value(stacks->a);
-	if(min_value < 0)
+	if (min_value < 0)
 	{
 		normalize_values(stacks->a, min_value);
 	}

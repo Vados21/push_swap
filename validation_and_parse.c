@@ -44,8 +44,7 @@ void	validate_input(int argc, char **argv, char **numbers)
 			if (numbers)
 				free_numbers(numbers);
 			error();
-		}
-			
+		}			
 		num = ft_atoi_ver_2(argv[i]);
 		if (num < INT_MIN || num > INT_MAX)
 		{
@@ -58,15 +57,14 @@ void	validate_input(int argc, char **argv, char **numbers)
 	check_duplicates(argc, argv, numbers);
 }
 
-
-t_node	*create_node(int data)
+t_node	*create_node(int data, t_stack *stack)
 {
 	t_node	*new_node;
 
 	new_node = malloc(sizeof(t_node));
 	if (!new_node)
 	{
-		printf("create_node");
+		free_stack_on_error(stack);
 		error();
 	}
 	new_node->data = data;
@@ -97,18 +95,13 @@ t_stack	*parse_input(int argc, char **argv)
 
 	stack = malloc(sizeof(t_stack));
 	if (!stack)
-	{
-		printf("parse_input");
 		error();
-		
-	}
-		
 	stack->top = NULL;
 	stack->size = 0;
 	i = 0;
 	while (i < argc)
 	{
-		add_node_to_stack(stack, create_node(ft_atoi_ver_2(argv[i])));
+		add_node_to_stack(stack, create_node(ft_atoi_ver_2(argv[i]), stack));
 		i++;
 	}
 	return (stack);

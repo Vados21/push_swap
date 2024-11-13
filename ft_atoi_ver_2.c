@@ -24,6 +24,8 @@ long long int	ft_atoi_ver_2(const char *str)
 
 	sign = 1;
 	res = 0;
+	if (!str)
+		error();
 	while (is_whitespace(*str))
 		str++;
 	if (*str == '-' || *str == '+')
@@ -34,12 +36,6 @@ long long int	ft_atoi_ver_2(const char *str)
 	while (*str >= '0' && *str <= '9')
 	{
 		res = res * 10 + (*(str++) - '0');
-		if ((sign == 1 && res > INT_MAX)
-			|| ((sign == -1) && ((res * sign) < INT_MIN)))
-		{
-			error();
-			//printf("atoi");
-		}
 	}
 	return (res * sign);
 }

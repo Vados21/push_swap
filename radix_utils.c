@@ -62,7 +62,6 @@ void	normalize_values(t_stack *stack, long long int min_value)
 
 	if (min_value >= 0)
 		return ;
-
 	current = stack->top;
 	while (current != NULL)
 	{
@@ -71,14 +70,12 @@ void	normalize_values(t_stack *stack, long long int min_value)
 	}
 }
 
-
 void	restore_values(t_stack *stack, int min_value)
 {
 	t_node	*current;
 
 	if (min_value >= 0)
 		return ;
-
 	current = stack->top;
 	while (current != NULL)
 	{
