@@ -36,6 +36,11 @@ long long int	ft_atoi_ver_2(const char *str)
 	while (*str >= '0' && *str <= '9')
 	{
 		res = res * 10 + (*(str++) - '0');
+		if (res < INT_MIN || res > INT_MAX)
+		{
+			error(); // clean memory!!!
+		}
 	}
+	
 	return (res * sign);
 }

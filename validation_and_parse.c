@@ -46,7 +46,7 @@ void	validate_input(int argc, char **argv, char **numbers)
 			error();
 		}			
 		num = ft_atoi_ver_2(argv[i]);
-		if (num < INT_MIN || num > INT_MAX)
+		if (!num)
 		{
 			if (numbers)
 				free_numbers(numbers);
@@ -54,7 +54,7 @@ void	validate_input(int argc, char **argv, char **numbers)
 		}
 		i++;
 	}
-	check_duplicates(argc, argv, numbers);
+	check_duplicates(argc, argv);
 }
 
 t_node	*create_node(int data, t_stack *stack)
@@ -95,7 +95,10 @@ t_stack	*parse_input(int argc, char **argv)
 
 	stack = malloc(sizeof(t_stack));
 	if (!stack)
+	{
+		free_stack_on_error(stack);
 		error();
+	}
 	stack->top = NULL;
 	stack->size = 0;
 	i = 0;

@@ -50,7 +50,10 @@ void	initialize_stacks(t_push_swap *stacks, int argc, char **argv)
 	{
 		numbers = ft_split(argv[1], ' ');
 		if (!numbers)
+		{
+			free_numbers(numbers);
 			error();
+		}
 		new_argc = count_numbers(numbers);
 		validate_input(new_argc, numbers, numbers);
 		stacks->a = parse_input(new_argc, numbers);
@@ -60,6 +63,7 @@ void	initialize_stacks(t_push_swap *stacks, int argc, char **argv)
 	{
 		validate_input(argc - 1, argv + 1, NULL);
 		stacks->a = parse_input(argc - 1, argv + 1);
+		free_numbers(numbers);
 	}
 	initialize_stack_b(stacks);
 }

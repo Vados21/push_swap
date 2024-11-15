@@ -26,4 +26,3 @@ void	ft_add_back(t_list **alst, t_list *new)
 		}
 	}
 }
-

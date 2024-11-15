@@ -70,7 +70,7 @@ void			initialize_stacks(t_push_swap *stacks, int argc, char **argv);
 
 // additional utils
 void			validate_input(int argc, char **argv, char **numbers);
-void			check_duplicates(int argc, char **argv, char **numbers);
+void			check_duplicates(int argc, char **argv);
 void			error(void);
 void			free_stack_on_error(t_stack *stack);
 int				is_sorted(t_stack *stack);
