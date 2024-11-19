@@ -17,9 +17,9 @@ static char	is_whitespace(char c)
 		|| c == '\f');
 }
 
-long long int	ft_atoi_ver_2(const char *str)
+long long int	ft_atoi_ver_2(const char *str, char **numbers)
 {
-	int				sign;
+	long			sign;
 	long long int	res;
 
 	sign = 1;
@@ -36,11 +36,12 @@ long long int	ft_atoi_ver_2(const char *str)
 	while (*str >= '0' && *str <= '9')
 	{
 		res = res * 10 + (*(str++) - '0');
-		if (res < INT_MIN || res > INT_MAX)
+		if ((sign * res) < INT_MIN || (sign * res) > INT_MAX)
 		{
-			error(); // clean memory!!!
+			if (numbers)
+				free_numbers(numbers);
+			error();
 		}
 	}
-	
 	return (res * sign);
 }

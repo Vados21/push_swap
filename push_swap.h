@@ -70,14 +70,14 @@ void			initialize_stacks(t_push_swap *stacks, int argc, char **argv);
 
 // additional utils
 void			validate_input(int argc, char **argv, char **numbers);
-void			check_duplicates(int argc, char **argv);
+void			check_duplicates(int argc, char **argv, char **numbers);
 void			error(void);
 void			free_stack_on_error(t_stack *stack);
 int				is_sorted(t_stack *stack);
 int				is_number(char *str);
 
 // parsing and stack functions
-t_stack			*parse_input(int argc, char **argv);
+t_stack			*parse_input(int argc, char **argv, char **numbers);
 void			free_stack(t_stack *stack);
 void			add_node_to_stack(t_stack *stack, t_node *new_node);
 void			push_to_stack(t_stack *stack, int num);
@@ -90,7 +90,7 @@ int				count_numbers(char **numbers);
 int				find_min_value(t_stack *stack);
 void			normalize_values(t_stack *stack, long long int min_value);
 void			restore_values(t_stack *stack, int min_value);
-long long int	ft_atoi_ver_2(const char *str);
+long long int	ft_atoi_ver_2(const char *str, char **numbers);
 long long int	find_max_value(t_stack *stack);
 long long int	calculate_max_bits(long long int max_value);
 #endif

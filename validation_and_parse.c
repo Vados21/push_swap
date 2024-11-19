@@ -45,7 +45,7 @@ void	validate_input(int argc, char **argv, char **numbers)
 				free_numbers(numbers);
 			error();
 		}			
-		num = ft_atoi_ver_2(argv[i]);
+		num = ft_atoi_ver_2(argv[i], numbers);
 		if (!num)
 		{
 			if (numbers)
@@ -54,7 +54,7 @@ void	validate_input(int argc, char **argv, char **numbers)
 		}
 		i++;
 	}
-	check_duplicates(argc, argv);
+	check_duplicates(argc, argv, numbers);
 }
 
 t_node	*create_node(int data, t_stack *stack)
@@ -88,7 +88,7 @@ void	add_node_to_stack(t_stack *stack, t_node *new_node)
 	stack->size++;
 }
 
-t_stack	*parse_input(int argc, char **argv)
+t_stack	*parse_input(int argc, char **argv, char **numbers)
 {
 	t_stack	*stack;
 	int		i;
@@ -104,7 +104,8 @@ t_stack	*parse_input(int argc, char **argv)
 	i = 0;
 	while (i < argc)
 	{
-		add_node_to_stack(stack, create_node(ft_atoi_ver_2(argv[i]), stack));
+		add_node_to_stack(stack,
+			create_node(ft_atoi_ver_2(argv[i], numbers), stack));
 		i++;
 	}
 	return (stack);

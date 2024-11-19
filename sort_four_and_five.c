@@ -33,20 +33,47 @@ void	find_mins(t_push_swap *stacks, long long int *min1, long long int *min2)
 	}
 }
 
+int	find_position(t_stack *stack, long long int value)
+{
+	t_node	*current;
+	int		position;
+
+	current = stack->top;
+	position = 0;
+	while (current)
+	{
+		if (current->data == value)
+			break ;
+		current = current->next;
+		position++;
+	}
+	return (position);
+}
+
 void	extract_mins(t_push_swap *stacks)
 {
 	long long int	min1;
 	long long int	min2;
-	int				rotations;
+	int				pos_min1;
+	int				pos_min2;
 
 	find_mins(stacks, &min1, &min2);
-	rotations = 0;
-	while (stacks->a->top->data != min1 && rotations++ < stacks->a->size)
-		ra(stacks);
+	pos_min1 = find_position(stacks->a, min1);
+	pos_min2 = find_position(stacks->a, min2);
+	if (pos_min1 <= stacks->a->size / 2)
+		while (stacks->a->top->data != min1)
+			ra(stacks);
+	else
+		while (stacks->a->top->data != min1)
+			rra(stacks);
 	pb(stacks->a, stacks->b);
-	rotations = 0;
-	while (stacks->a->top->data != min2 && rotations++ < stacks->a->size)
-		ra(stacks);
+	pos_min2 = find_position(stacks->a, min2);
+	if (pos_min2 <= stacks->a->size / 2)
+		while (stacks->a->top->data != min2)
+			ra(stacks);
+	else
+		while (stacks->a->top->data != min2)
+			rra(stacks);
 	pb(stacks->a, stacks->b);
 	if (stacks->b->top->data < stacks->b->top->next->data)
 		sb(stacks);
@@ -56,8 +83,17 @@ void	sort_five(t_push_swap *stacks)
 {
 	extract_mins(stacks);
 	sort_three(stacks);
-	pa(stacks->a, stacks->b);
-	pa(stacks->a, stacks->b);
+	if (stacks->b->top->data > stacks->b->top->next->data)
+	{
+		pa(stacks->a, stacks->b);
+		pa(stacks->a, stacks->b);
+	}
+	else
+	{
+		pa(stacks->a, stacks->b);
+		sa(stacks);
+		pa(stacks->a, stacks->b);
+	}
 }
 
 void	sort_four(t_push_swap *stacks)

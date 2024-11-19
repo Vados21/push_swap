@@ -56,13 +56,13 @@ void	initialize_stacks(t_push_swap *stacks, int argc, char **argv)
 		}
 		new_argc = count_numbers(numbers);
 		validate_input(new_argc, numbers, numbers);
-		stacks->a = parse_input(new_argc, numbers);
+		stacks->a = parse_input(new_argc, numbers, numbers);
 		free_numbers(numbers);
 	}
 	else
 	{
 		validate_input(argc - 1, argv + 1, NULL);
-		stacks->a = parse_input(argc - 1, argv + 1);
+		stacks->a = parse_input(argc - 1, argv + 1, numbers);
 		free_numbers(numbers);
 	}
 	initialize_stack_b(stacks);

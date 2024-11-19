@@ -68,7 +68,7 @@ int	find_max_digits(t_stack *stack)
 }
 
 void	validate_input(int argc, char **argv, char **numbers);
-t_stack	*parse_input(int argc, char **argv);
+t_stack	*parse_input(int argc, char **argv, char **numbers);
 
 void	sort_stacks(t_push_swap *stacks)
 {

@@ -17,7 +17,7 @@ void	error(void)
 	exit(1);
 }
 
-void	check_duplicates(int argc, char **argv)
+void	check_duplicates(int argc, char **argv, char **numbers)
 {
 	int				i;
 	int				j;
@@ -27,11 +27,11 @@ void	check_duplicates(int argc, char **argv)
 	i = 0;
 	while (i < argc - 1)
 	{
-		num1 = ft_atoi_ver_2(argv[i]);
+		num1 = ft_atoi_ver_2(argv[i], numbers);
 		j = i + 1;
 		while (j < argc)
 		{
-			num2 = ft_atoi_ver_2(argv[j]);
+			num2 = ft_atoi_ver_2(argv[j], numbers);
 			if (num1 == num2)
 				error();
 			j++;
