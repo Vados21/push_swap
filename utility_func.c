@@ -61,11 +61,11 @@ void	initialize_stacks(t_push_swap *stacks, int argc, char **argv)
 	}
 	else
 	{
-		validate_input(argc - 1, argv + 1, NULL);
+		validate_input(argc - 1, argv + 1, numbers);
 		stacks->a = parse_input(argc - 1, argv + 1, numbers);
 		free_numbers(numbers);
 	}
-	initialize_stack_b(stacks);
+	initialize_stack_b(stacks, numbers);
 }
 
 int	count_numbers(char **numbers)
@@ -78,11 +78,12 @@ int	count_numbers(char **numbers)
 	return (count);
 }
 
-void	initialize_stack_b(t_push_swap *stacks)
+void	initialize_stack_b(t_push_swap *stacks, char **numbers)
 {
 	stacks->b = malloc(sizeof(t_stack));
 	if (!stacks->b)
 	{
+		free(numbers);
 		free_stack_on_error(stacks->a);
 		error();
 	}

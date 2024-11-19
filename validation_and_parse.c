@@ -25,7 +25,7 @@ int	is_number(char *str)
 	while (str[i])
 	{
 		if (!ft_isdigit(str[i]))
-			return (0);
+			error();
 		i++;
 	}
 	return (1);
@@ -42,15 +42,19 @@ void	validate_input(int argc, char **argv, char **numbers)
 		if (!is_number(argv[i]))
 		{
 			if (numbers)
+			{
 				free_numbers(numbers);
-			error();
+				error();
+			}
 		}			
 		num = ft_atoi_ver_2(argv[i], numbers);
 		if (!num)
 		{
 			if (numbers)
+			{
 				free_numbers(numbers);
-			error();
+				error();
+			}
 		}
 		i++;
 	}
@@ -96,6 +100,7 @@ t_stack	*parse_input(int argc, char **argv, char **numbers)
 	stack = malloc(sizeof(t_stack));
 	if (!stack)
 	{
+		free_numbers(numbers);
 		free_stack_on_error(stack);
 		error();
 	}

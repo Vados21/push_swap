@@ -25,7 +25,10 @@ long long int	ft_atoi_ver_2(const char *str, char **numbers)
 	sign = 1;
 	res = 0;
 	if (!str)
-		error();
+	{
+		free_numbers(numbers);
+		error();		
+	}
 	while (is_whitespace(*str))
 		str++;
 	if (*str == '-' || *str == '+')
@@ -39,8 +42,10 @@ long long int	ft_atoi_ver_2(const char *str, char **numbers)
 		if ((sign * res) < INT_MIN || (sign * res) > INT_MAX)
 		{
 			if (numbers)
+			{
 				free_numbers(numbers);
-			error();
+				error();
+			}
 		}
 	}
 	return (res * sign);

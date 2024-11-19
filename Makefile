@@ -28,7 +28,6 @@ SRCS = push_swap.c \
 	   sort_four_and_five.c \
 	   radix_sort.c \
 	   sort_two_and_three.c \
-	   split.c \
 	   swap.c \
 	   validation_and_parse.c \
 	   error_and_duble.c \

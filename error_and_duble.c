@@ -33,7 +33,10 @@ void	check_duplicates(int argc, char **argv, char **numbers)
 		{
 			num2 = ft_atoi_ver_2(argv[j], numbers);
 			if (num1 == num2)
+			{
+				free_numbers(numbers);
 				error();
+			}
 			j++;
 		}
 		i++;
@@ -73,14 +76,15 @@ int	is_sorted(t_stack *stack)
 	return (1);
 }
 
-void	free_numbers(char **numbers)
+void free_numbers(char **numbers)
 {
-	int	i;
-
-	if (!numbers)
-		return ;
-	i = 0;
-	while (numbers[i])
-		free(numbers[i++]);
-	free(numbers);
+    int i = 0;
+    if (!numbers)
+        return ;
+    while (numbers[i])
+    {
+        free(numbers[i]);
+        i++;
+    }
+    free(numbers);
 }
