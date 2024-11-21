@@ -12,44 +12,70 @@
 
 #include "push_swap.h"
 
-void	perform_bit_shift(t_push_swap *stacks, int bit)
+static int	max_amout_bits(int num)
 {
-	int				j;
-	int				size;
-	long long int	num;
+	int	i;
 
-	j = 0;
-	size = stacks->a->size;
-	while (j < size)
+	i = 0;
+	while (1 << i <= num)
+		i++;
+	return (i);
+}
+
+static void	check_bit_a(t_push_swap *stacks, int shift)
+{
+	int		i;
+	int		moves;
+
+	moves = stacks->a->size;
+	i = 0;
+	while (i < moves)
 	{
-		num = stacks->a->top->data;
-		if ((num >> bit) & 1)
+		if (stacks->a->top->rank & (1 << shift))
 			ra(stacks);
 		else
 			pb(stacks->a, stacks->b);
-		j++;
+		i++;
 	}
-	while (stacks->b->size > 0)
+}
+
+static void	check_bit_b(t_push_swap *stacks, int shift)
+{
+	int		i;
+	int		moves;
+
+	moves = stacks->b->size;
+	i = 0;
+	while (i < moves)
+	{
+		if (stacks->b->top->rank & (1 << shift))
+			pa(stacks->a, stacks->b);
+		else
+			rb(stacks);
+		i++;
+	}
+}
+
+static void	move_num_to_a(t_push_swap *stacks)
+{
+	while (stacks->b->size)
 		pa(stacks->a, stacks->b);
 }
 
 void	radix_sort(t_push_swap *stacks)
 {
-	long long int	min_value;
-	long long int	max_bits;
-	int				i;
+	int	shift_limit;
+	int	i;
 
-	min_value = find_min_value(stacks->a);
-	if (min_value < 0)
-	{
-		normalize_values(stacks->a, min_value);
-	}
-	max_bits = calculate_max_bits(find_max_value(stacks->a));
+	shift_limit = max_amout_bits(stacks->a->size);
 	i = 0;
-	while (i <= max_bits)
+	while (i < shift_limit)
 	{
-		perform_bit_shift(stacks, i);
+		check_bit_a(stacks, i);
+		if (i < shift_limit - 1)
+			check_bit_b(stacks, i + 1);
+		else
+			move_num_to_a(stacks);
 		i++;
 	}
-	restore_values(stacks->a, min_value);
 }

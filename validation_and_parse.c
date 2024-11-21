@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 #include "push_swap.h"
 
-int	is_number(char *str)
+int	is_number(const char *str)
 {
 	int	i;
 
@@ -31,6 +31,21 @@ int	is_number(char *str)
 	return (1);
 }
 
+static void	validate_error(char **numbers)
+{
+	if (numbers)
+	{
+		free_numbers(numbers);
+		error();
+	}
+}
+
+static void	validate_number(const char *arg, char **numbers)
+{
+	if (!is_number(arg))
+		validate_error(numbers);
+}
+
 void	validate_input(int argc, char **argv, char **numbers)
 {
 	int				i;
@@ -39,79 +54,11 @@ void	validate_input(int argc, char **argv, char **numbers)
 	i = 0;
 	while (i < argc)
 	{
-		if (!is_number(argv[i]))
-		{
-			if (numbers)
-			{
-				free_numbers(numbers);
-				error();
-			}
-		}			
+		validate_number(argv[i], numbers);
 		num = ft_atoi_ver_2(argv[i], numbers);
 		if (!num)
-		{
-			if (numbers)
-			{
-				free_numbers(numbers);
-				error();
-			}
-		}
+			validate_error(numbers);
 		i++;
 	}
 	check_duplicates(argc, argv, numbers);
-}
-
-t_node	*create_node(int data, t_stack *stack)
-{
-	t_node	*new_node;
-
-	new_node = malloc(sizeof(t_node));
-	if (!new_node)
-	{
-		free_stack_on_error(stack);
-		error();
-	}
-	new_node->data = data;
-	new_node->next = NULL;
-	return (new_node);
-}
-
-void	add_node_to_stack(t_stack *stack, t_node *new_node)
-{
-	t_node	*current;
-
-	if (!stack->top)
-		stack->top = new_node;
-	else
-	{
-		current = stack->top;
-		while (current->next)
-			current = current->next;
-		current->next = new_node;
-	}
-	stack->size++;
-}
-
-t_stack	*parse_input(int argc, char **argv, char **numbers)
-{
-	t_stack	*stack;
-	int		i;
-
-	stack = malloc(sizeof(t_stack));
-	if (!stack)
-	{
-		free_numbers(numbers);
-		free_stack_on_error(stack);
-		error();
-	}
-	stack->top = NULL;
-	stack->size = 0;
-	i = 0;
-	while (i < argc)
-	{
-		add_node_to_stack(stack,
-			create_node(ft_atoi_ver_2(argv[i], numbers), stack));
-		i++;
-	}
-	return (stack);
 }

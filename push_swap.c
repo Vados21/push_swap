@@ -99,6 +99,7 @@ int	main(int argc, char **argv)
 	if (argc == 2 && argv[1][0] == '\0')
 		error();
 	initialize_stacks(&stacks, argc, argv);
+	get_rank(&stacks);
 	sort_stacks(&stacks);
 	free_stack(stacks.a);
 	free_stack(stacks.b);

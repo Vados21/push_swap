@@ -76,15 +76,17 @@ int	is_sorted(t_stack *stack)
 	return (1);
 }
 
-void free_numbers(char **numbers)
+void	free_numbers(char **numbers)
 {
-    int i = 0;
-    if (!numbers)
-        return ;
-    while (numbers[i])
-    {
-        free(numbers[i]);
-        i++;
-    }
-    free(numbers);
+	int	i;
+
+	i = 0;
+	if (!numbers)
+		return ;
+	while (numbers[i])
+	{
+		free(numbers[i]);
+		i++;
+	}
+	free(numbers);
 }

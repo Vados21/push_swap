@@ -17,6 +17,18 @@ static char	is_whitespace(char c)
 		|| c == '\f');
 }
 
+static void	ft_atoi_error(char **numbers)
+{
+	if (numbers)
+		free_numbers(numbers);
+	error();
+}
+
+static int	is_overflow(long long int res, long sign)
+{
+	return ((sign * res) < INT_MIN || (sign * res) > INT_MAX);
+}
+
 long long int	ft_atoi_ver_2(const char *str, char **numbers)
 {
 	long			sign;
@@ -25,28 +37,20 @@ long long int	ft_atoi_ver_2(const char *str, char **numbers)
 	sign = 1;
 	res = 0;
 	if (!str)
-	{
-		free_numbers(numbers);
-		error();		
-	}
+		ft_atoi_error(numbers);
 	while (is_whitespace(*str))
 		str++;
 	if (*str == '-' || *str == '+')
 	{
-		if (*(str++) == '-')
+		if (*str == '-')
 			sign = -1;
+		str++;
 	}
 	while (*str >= '0' && *str <= '9')
 	{
 		res = res * 10 + (*(str++) - '0');
-		if ((sign * res) < INT_MIN || (sign * res) > INT_MAX)
-		{
-			if (numbers)
-			{
-				free_numbers(numbers);
-				error();
-			}
-		}
+		if (is_overflow(res, sign))
+			ft_atoi_error(numbers);
 	}
 	return (res * sign);
 }

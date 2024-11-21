@@ -31,7 +31,8 @@ SRCS = push_swap.c \
 	   swap.c \
 	   validation_and_parse.c \
 	   error_and_duble.c \
-	   radix_utils.c \
+	   parse.c \
+	   rank.c \
 
 LIBFT = libft/libft.a
 
