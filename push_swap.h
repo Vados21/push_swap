@@ -75,7 +75,7 @@ void			check_duplicates(int argc, char **argv, char **numbers);
 void			error(void);
 void			free_stack_on_error(t_stack *stack);
 int				is_sorted(t_stack *stack);
-int				is_number(const char *str);
+int				is_number(const char *str, char **numbers);
 
 // parsing and stack functions
 t_stack			*parse_input(int argc, char **argv, char **numbers);

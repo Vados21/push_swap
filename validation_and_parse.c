@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 #include "push_swap.h"
 
-int	is_number(const char *str)
+int	is_number(const char *str, char **numbers)
 {
 	int	i;
 
@@ -25,25 +25,25 @@ int	is_number(const char *str)
 	while (str[i])
 	{
 		if (!ft_isdigit(str[i]))
+		{
+			free_numbers(numbers);
 			error();
+		}
 		i++;
 	}
 	return (1);
 }
 
-static void	validate_error(char **numbers)
-{
-	if (numbers)
-	{
-		free_numbers(numbers);
-		error();
-	}
-}
-
 static void	validate_number(const char *arg, char **numbers)
 {
-	if (!is_number(arg))
-		validate_error(numbers);
+	if (!is_number(arg, numbers))
+	{
+		if (numbers)
+		{
+			free_numbers(numbers);
+			error();
+		}
+	}
 }
 
 void	validate_input(int argc, char **argv, char **numbers)
@@ -56,8 +56,8 @@ void	validate_input(int argc, char **argv, char **numbers)
 	{
 		validate_number(argv[i], numbers);
 		num = ft_atoi_ver_2(argv[i], numbers);
-		if (!num)
-			validate_error(numbers);
+		if (!num && ft_strncmp(argv[i], "0", 1) != 0)
+			validate_number(NULL, numbers);
 		i++;
 	}
 	check_duplicates(argc, argv, numbers);
